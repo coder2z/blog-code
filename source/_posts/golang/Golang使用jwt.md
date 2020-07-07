@@ -5,7 +5,7 @@ tags:
 categories:
   - golang
 comments: true
-thumbnail: 'https://raw.githubusercontent.com/myxy99/pic/master/img/20200707204230.png'
+thumbnail: 'https://gitee.com/myxy99/pic/raw/master/img/20200707204230.png'
 abbrlink: 631d0e90
 date: 2020-07-07 20:35:19
 ---

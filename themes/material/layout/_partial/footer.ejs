@@ -1,0 +1,28 @@
+<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    <% if(theme.scheme === 'Paradox') { %>
+        <!-- Paradox Footer Left Section -->
+        <%- partial('_partial/footer-left') %>
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;<%- config.title %>
+            <% if(theme.footer_text) { %>
+                <br>
+                <% if(Array.isArray(theme.footer_text)) { %>
+                    <%- theme.footer_text.join('<br>') %>
+                <% } else { %>
+                    <%- theme.footer_text %>
+                <% } %>
+            <% } %>
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://myxy99.cn" target="_blank" class="footer-develop-a">myxy99</a></div>
+            </div>
+        </div>
+    <% } %>
+</footer>

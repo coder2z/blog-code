@@ -12,6 +12,13 @@
 
     <div class="section-spacer"></div>
 
+    <% if(theme.wordcount.enable === true) { %>
+        <span class="post-count"><%= wordcount(page.content) %>字</span>
+        |
+        </i><span class="post-count"><%= min2read(page.content) %>分</span>
+        |
+        <% } %>
+
     <!-- Favorite -->
     <!--
         <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">

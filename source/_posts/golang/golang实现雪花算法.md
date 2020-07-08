@@ -1,6 +1,8 @@
 ---
 title: Golang实现雪花算法
-tags: golang
+tags: 
+    - golang
+    - 算法
 categories: golang
 abbrlink: 41aae1e1
 date: 2020-07-07 13:09:56

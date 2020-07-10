@@ -65,7 +65,7 @@ package study;
 
 //  请求参数
 message Token {
-    string jwtToken = 1; //1为字段顺序 required必须
+    string jwtToken = 1; //1为字段顺序
     int64 timeStamp = 2;
 }
 

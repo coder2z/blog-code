@@ -84,7 +84,7 @@ service Auth {
     rpc CheckToken (Token) returns (TokenR);
 }
 
-```s
+```
 
 # 生成兼容grpc的go文件
 ```golang

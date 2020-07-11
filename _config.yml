@@ -113,7 +113,7 @@ abbrlink:
   alg: crc32  # 算法：crc16(default) and crc32
   rep: hex    # 进制：dec(default) and hex 
 
-neat_enable: false  #打开总开关
+neat_enable: true  #打开总开关
 neat_html:      
   enable: true      #打开压缩html文件开关
   exclude:          #html的排除列表

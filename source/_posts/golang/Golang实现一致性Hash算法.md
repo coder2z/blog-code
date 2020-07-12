@@ -4,6 +4,7 @@ tags:
   - golang
   - 算法
   - 一致性Hash
+  - 分布式
 categories:
   - golang
 comments: true

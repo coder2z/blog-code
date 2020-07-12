@@ -13,7 +13,7 @@ cd {你的Jenkins工作目录}/updates  #进入更新配置位置
 ```
 ## 第一种方式：使用vim
 ```cmd
-vim default.json   #这个Json文件与上边的配置文件是相同的
+vim default.json
 ```
 使用vim的命令，如下，替换所有插件下载的url
 ```cmd

@@ -199,5 +199,8 @@ func TestValidator(t *testing.T) {
 }
 
 ```
+参考连接：[https://gin-gonic.com/zh-cn/docs/examples/custom-validators/](https://gin-gonic.com/zh-cn/docs/examples/custom-validators/)
+
 参考连接：[https://github.com/go-playground/validator/](https://github.com/go-playground/validator/)
+
 参考连接：[https://www.liwenzhou.com/posts/Go/validator_usages/](https://www.liwenzhou.com/posts/Go/validator_usages/)

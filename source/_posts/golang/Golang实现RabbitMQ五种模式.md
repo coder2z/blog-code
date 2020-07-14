@@ -3,6 +3,7 @@ title: Golang实现RabbitMQ五种模式
 tags:
   - golang
   - RabbitMQ
+  - 消息队列
 categories:
   - golang
 comments: true

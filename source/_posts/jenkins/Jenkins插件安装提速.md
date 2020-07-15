@@ -4,7 +4,7 @@ tags: jenkins
 categories: jenkins
 comments: true
 abbrlink: 87b776c7
-date: 2020-07-07 14:46:27
+date: 2020-06-23 14:46:27
 ---
 # 操作步骤
 配置Json其实在Jenkins的工作目录中

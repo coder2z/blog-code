@@ -167,19 +167,22 @@
             var item = scriptList[i];
             lsloader.runInlineScript(item.id,item.id);
         }
-        (function(){
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-            }
-            else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
+    })()
+    // (function(){
+    // var bp = document.createElement('script');
+    // var curProtocol = window.location.protocol.split(':')[0];
+    // if (curProtocol === 'https') {
+    //     bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    // }
+    // else {
+    //     bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    // }
+    // var s = document.getElementsByTagName("script")[0];
+    // s.parentNode.insertBefore(bp, s);
+    // })();
 
+
+    
 console.log('\n %c © myxy99 GitHub | https://github.com/myxy99 %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
 console.log("   ____       _\n" +
         "  / ___| ___ | |    __ _ _ __   __ _\n" +

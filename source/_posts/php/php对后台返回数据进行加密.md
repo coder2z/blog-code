@@ -5,6 +5,7 @@ tags:
 categories:
   - php
 comments: true
+abbrlink: b204c5a4
 date: 2020-04-29 22:32:49
 thumbnail:
 ---

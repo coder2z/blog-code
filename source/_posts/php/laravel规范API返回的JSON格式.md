@@ -1,5 +1,5 @@
 ---
-title: laravel自定义API返回的JSON格式
+title: laravel规范API返回的JSON格式
 tags:
   - php
   - laravel
@@ -11,7 +11,7 @@ date: 2020-04-10 22:01:59
 thumbnail:
 ---
 
-# laravel 自定义API返回的JSON格式
+# laravel 规范API返回的JSON格式
 
 **在最近开发项目的时候使用Laravel框架，对api进行返回数据的时候，在团队开发的时候太随意了，缺少一个统一的结构来包装返回值，所以就需要进行返回格式的统一**
 

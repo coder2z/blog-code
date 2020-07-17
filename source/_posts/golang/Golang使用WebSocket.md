@@ -18,7 +18,7 @@ WebSocket是一种通信协议，旨在改善HTTP作为无状态协议通信的�
 
 ## 安装依赖
 
-```go get "github.com/gorilla/websocket"```
+```go get -u github.com/gorilla/websocket```
 
 
 ## 封装方法

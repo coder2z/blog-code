@@ -30,7 +30,7 @@ Route::resource('articles', 'ArticlesController')
 ```sh
 D:\wamp\www\laravel5>php artisan route:list
 
- articles                    	| articles.index
+ articles                     | articles.index
  articles/create              | articles.create
  articles                     | articles.store
  articles/{articles}          | articles.show
@@ -47,7 +47,7 @@ D:\wamp\www\laravel5>php artisan route:list
 ```php
 public function boot(Router $router)
 {
-	  parent::boot($router);
+	parent::boot($router);
     $router->model('articles','App\Article::class');
 }
 
@@ -62,7 +62,7 @@ public function boot(Router $router)
 ```php
 public function show($id){
     $article =Article::findOrFail($id);
- 	  dd($article);
+ 	dd($article);
     return view('articles.show', compact('article'));
 }
 

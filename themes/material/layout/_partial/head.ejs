@@ -18,6 +18,21 @@
         ]
     </script>
 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+
     <!-- dns prefetch -->
     <%- partial('_widget/dnsprefetch') %>
 
@@ -25,7 +40,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <meta name="google-site-verification" content="ucbENK4odss2IP5rNUMfk9TLfdP51QCi91ubNKlXliQ" />
     <!-- Title -->
     <%
         var title = page.title;

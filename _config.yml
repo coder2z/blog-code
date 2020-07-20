@@ -98,9 +98,11 @@ theme: material
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repository: git@github.com:myxy99/myxy99.github.io.git
+- type: git
+  repository:
+    github: git@github.com:myxy99/myxy99.github.io.git  # 这是原来的 github 配置
   branch: master
+- type: baidu_url_submitter                         # 这是新加的主动推送
 
 search:
     path: search.xml 

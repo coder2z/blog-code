@@ -5,7 +5,7 @@ layout: about
 ---
 
 # 关于我
-成都东软学院信息与软件工程系的本科在读学生，喜欢coding，生活，诗歌，音乐，足球，爱捣鼓网站上的一些奇怪的东西，拥有轻度选择恐惧症。
+成都东软学院信息与软件工程系的本科在读学生，喜欢coding，生活，音乐，电影，爱捣鼓网站上的一些奇怪的东西，拥有轻度选择恐惧症。
 
 主攻方向：Go后端开发
 ``` golang
@@ -21,8 +21,8 @@ type Skills struct {
 }
 func Me() (PersonalInformation, Skills) {
 	information := PersonalInformation{
-		Name:        "YangZeMiao",
-		Age:         20,
+		Name:        "YangZemiao",
+		Age:         21,
 		Address:     "SiChuan",
 		Email:       "myxy99@foxmail.com",
 		Description: "Like you like liking coding",

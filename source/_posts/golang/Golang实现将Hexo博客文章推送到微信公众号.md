@@ -81,11 +81,11 @@ func main() {
 
 *爬虫前需要把需要爬虫的网站信息存储到redis中*
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/15/20200715123711.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/15/20200715123711.png)
 
 爬取结果：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/15/20200715123621.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/15/20200715123621.png)
 
 
 # 实现微信公众号数据的发送

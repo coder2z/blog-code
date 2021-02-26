@@ -6,7 +6,7 @@ tags:
 categories:
   - php
 comments: true
-thumbnail: 'https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/16/20200716100937.png'
+thumbnail: 'https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716100937.png'
 abbrlink: 323529c6
 date: 2020-05-20 10:08:28
 ---

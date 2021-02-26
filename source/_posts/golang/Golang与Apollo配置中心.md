@@ -7,7 +7,7 @@ tags:
 categories:
   - golang
 comments: true
-thumbnail: 'https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718075440.png'
+thumbnail: 'https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718075440.png'
 abbrlink: c57fb934
 date: 2020-07-18 07:53:14
 ---
@@ -126,7 +126,7 @@ Portal started. You can visit http://localhost:8070 now!
 
 浏览器打开：http://域名或者ip:8070/ 验证安装
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718081558.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718081558.png)
 
 # Golang-Apollo客户端
 
@@ -145,7 +145,7 @@ go get -u github.com/shima-park/agollo
 
 Apollo中的配置：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718083852.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718083852.png)
 
 最简单的获取配置信息：
 ```golang
@@ -184,7 +184,7 @@ func main() {
 
 运行结果:
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718083940.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718083940.png)
 
 ## 配置监听
 

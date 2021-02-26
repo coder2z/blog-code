@@ -43,10 +43,10 @@ func TestValidator(t *testing.T) {
 我们使用postman请求测试下：
 
 拒绝：
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713084519.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713084519.png)
 
 通过：
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713084911.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713084911.png)
 
 可以看到表单验证已经生效，但是错误提示的字段不是特别友好，我们首先需要整理成前端能够解析的样子，在考虑翻译的问题。
 
@@ -61,15 +61,15 @@ fmt.Printf("%T \n", err)
 
 这里发现他的类型为:
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713085854.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713085854.png)
 
 下一步就是找到他的定义了。然后发现他是一个FieldError切片类型：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713090619.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713090619.png)
 
 然后我们继续看看FieldError是个什么东西：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713090827.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713090827.png)
 
 发现这里的FieldError是一个接口类型，里面的接口想必就是获取各种信息的。我们打印一下看看，所有我们需要改一下我们的代码，这里我就随便打印几个，其实我们看下官方在接口定义哪里的注释，也大概能明白什么意思。
 
@@ -97,7 +97,7 @@ fmt.Printf("%T \n", err)
 
 访问接口=>输出
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713091434.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713091434.png)
 
 这里也就很明显了。我们现在就能拿到我们错误信息进行封装返回了。我们小改一下代码：
 
@@ -135,11 +135,11 @@ func TestValidator(t *testing.T) {
 
 现在访问一下再看看：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713092201.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713092201.png)
 
 但是这样对于前端，还是不好获取，所有我把他改为数组。前端只需要循环这个数组就行。
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/13/20200713101702.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/13/20200713101702.png)
 
 
 

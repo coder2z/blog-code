@@ -19,7 +19,7 @@ thumbnail:
 
 
 没有依赖注入的系统：
-![](https://gitee.com/myxy99/pic/raw/master/img/20200709104638.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/20200709104638.png)
 
 在代码上的表现：
 ```golang

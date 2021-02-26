@@ -20,7 +20,7 @@ thumbnail:
 
 Cron 是 UNIX、SOLARIS、LINUX 下的一个十分有用的工具，通过 Cron 脚本能使计划任务定期地在系统后台自动运行。这种计划任务在 UNIX、SOLARIS、LINUX下术语为 Cron Jobs。Crontab 则是用来记录在特定时间运行的 Cron 的一个脚本文件，Crontab 文件的每一行均遵守特定的格式： 
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/16/20200716110047.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716110047.png)
 
 ## 使用
 
@@ -35,18 +35,18 @@ Cron 是 UNIX、SOLARIS、LINUX 下的一个十分有用的工具，通过 Cron 
 
 > ```* * * * * 《php路径》 《laravel项目路径》/artisan schedule:run >> /dev/null 2>&1```
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/16/20200716110351.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716110351.png)
 
 ### 定义调度
 
 **在App\Console\Commands下创建EmailTiming.php**
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/16/20200716110455.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716110455.png)
 
 
 **编辑 app/Console/Kernel.php 文件，将新生成的类进行注册：**
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/16/20200716110537.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716110537.png)
 
 常用：
 

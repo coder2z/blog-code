@@ -8,7 +8,7 @@ tags:
 categories:
   - golang
 comments: true
-thumbnail: 'https://gitee.com/myxy99/pic/raw/master/img/20200710081519.png'
+thumbnail: 'https://gitee.com/coder2m/pic/raw/master/img/20200710081519.png'
 abbrlink: 5f3710bf
 date: 2020-07-10 08:12:21
 ---
@@ -23,15 +23,15 @@ grpc官网：[https://www.grpc.io/](https://www.grpc.io/)
 
 RPC结构图：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/20200710082403.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/20200710082403.png)
 
 RPC调用过程：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/20200710082506.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/20200710082506.png)
 
 GRPC结构图：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/20200710082558.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/20200710082558.png)
 
 性能对比可以查看这篇文章：[https://blog.csdn.net/xuduorui/article/details/77938644](https://blog.csdn.net/xuduorui/article/details/77938644)
 
@@ -92,7 +92,7 @@ protoc --go_out=plugins=grpc:. *.proto
 
 ```
 生成了对应的pb文件：
-![](https://gitee.com/myxy99/pic/raw/master/img/20200710083457.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/20200710083457.png)
 
 # 编写服务端
 ```golang

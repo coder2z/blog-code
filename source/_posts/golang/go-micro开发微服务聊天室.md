@@ -31,7 +31,7 @@ thumbnail:
 
 ## 网站架构
 
-![网站架构](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/24/20200724132536.png)
+![网站架构](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/24/20200724132536.png)
 
 ## 项目启动
 
@@ -39,7 +39,7 @@ thumbnail:
 
 apollo中添加配置
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/24/20200724140425.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/24/20200724140425.png)
 
 启动认证服务
 ```

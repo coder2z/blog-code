@@ -7,7 +7,7 @@ tags:
 categories:
   - golang
 comments: true
-thumbnail: 'https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/14/20200714223657.png'
+thumbnail: 'https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/14/20200714223657.png'
 abbrlink: '73e61957'
 date: 2020-07-14 22:00:38
 ---
@@ -48,7 +48,7 @@ docker exec -ti lookupd /bin/sh    #进入容器，查看nsq目录结构
 
 ```
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/14/20200714221747.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/14/20200714221747.png)
 
 ### 启动nsqadmin管理系统
 
@@ -59,7 +59,7 @@ docker run -d --name nsqadmin
 
 ```
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/14/20200714221844.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/14/20200714221844.png)
 
 ## 部署NSQd节点服务
 
@@ -73,7 +73,7 @@ docker run -d --name nsqd -p 4150:4150 -p
 
 ```
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/14/20200714221947.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/14/20200714221947.png)
 
 
 ### 创建从服务器（可以省略，根据需求来）
@@ -92,7 +92,7 @@ docker run -d --name nsqd -p 4150:4150 -p
 
 访问：ip:4171
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/14/20200714222423.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/14/20200714222423.png)
 
 搭建成功
 

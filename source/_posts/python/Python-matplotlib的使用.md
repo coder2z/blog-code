@@ -39,7 +39,7 @@ plt.show()
 
 运行:
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718200657.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718200657.png)
 
 ## 折线图：plot
 
@@ -57,7 +57,7 @@ plt.show()
 
 运行:
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718201004.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718201004.png)
 
 
 ## 条形图：bar
@@ -79,7 +79,7 @@ plt.show()
 
 运行:
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718201110.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718201110.png)
 
 ### 并列条形图
 
@@ -100,7 +100,7 @@ plt.show()
 
 运行：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718201305.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718201305.png)
 
 
 ## 直方图：hist
@@ -120,7 +120,7 @@ plt.show()
 
 运行：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718201406.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718201406.png)
 
 ## 饼状图：pie
 
@@ -141,7 +141,7 @@ plt.show()
 
 运行：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718201458.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718201458.png)
 
 
 ## 箱形图（箱线图）：boxplot
@@ -161,7 +161,7 @@ plt.show()
 
 运行：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/18/20200718201541.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/18/20200718201541.png)
 
 
 这里就简单距离了基础使用具体的设置的参数还有很多，就需要查看官方文档了。

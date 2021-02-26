@@ -7,7 +7,7 @@ tags:
 categories:
   - golang
 comments: true
-thumbnail: 'https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712102819.png'
+thumbnail: 'https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712102819.png'
 abbrlink: 6edb5861
 date: 2020-07-11 10:21:53
 ---
@@ -30,7 +30,7 @@ date: 2020-07-11 10:21:53
 
 # 架构:
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712131203.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712131203.png)
 
 # 启动
 cd /cmd
@@ -50,24 +50,24 @@ go run spike.go //启动秒杀系统，支持横行扩展
 
 ## 设置：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712090309.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712090309.png)
 
 
 ## 测试结果：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712085943.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712085943.png)
 
 
 ## RabbitMQ：
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712090446.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712090446.png)
 
 ## mysql:
 并没有超卖，测试添加了1000个库存
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712090604.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712090604.png)
 
-![](https://gitee.com/myxy99/pic/raw/master/img/blog/2020/07/12/20200712090629.png)
+![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712090629.png)
 
 
 # 实现

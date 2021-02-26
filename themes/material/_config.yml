@@ -167,14 +167,14 @@ toc:
 
 # SNS Menu
 sns:
-    email: myxy99@foxmail.com
+    email: coder2m@foxmail.com
     facebook: 
     twitter: 
     googleplus: 
     weibo:
     instagram:
     tumblr:
-    github: "https://github.com/myxy99"
+    github: "https://github.com/coder2m"
     linkedin:
     zhihu:
     bilibili: "https://space.bilibili.com/276662948"
@@ -261,8 +261,8 @@ comment:
     changyan_conf:
     changyan_thread_key_type: path
     livere_data_uid: MTAyMC81MTA0Mi8yNzUyNA==
-    gitment_repo: myxy99.github.io  # git repo of the hexo
-    gitment_owner: myxy99 # git repo's owner
+    gitment_repo: coder2m.github.io  # git repo of the hexo
+    gitment_owner: coder2m # git repo's owner
     gitment_client_id: 00a0ec5bdacc1f01cf84 # github app client id
     gitment_client_secret : c1b12ec34e646e714eccef2bdaff831d21e64b59 # github app client secret
     valine_leancloud_appId: i64iehqvBVuQVEVc1RQVJX5l-gzGzoHsz # leancloud application app id
@@ -274,8 +274,8 @@ comment:
     valine_lang: zh-cn # i18n
     valine_placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
     valine_guest_info: nick,mail,link #valine comment header info
-    gitalk_repo: myxy99.github.io # git repo of the hexo
-    gitalk_owner: myxy99  # git repo's owner
+    gitalk_repo: coder2m.github.io # git repo of the hexo
+    gitalk_owner: coder2m  # git repo's owner
     gitalk_client_id: 00a0ec5bdacc1f01cf84 # github app client id
     gitalk_client_secret: c1b12ec34e646e714eccef2bdaff831d21e64b59 # github app client secret
     wildfire_database_provider: firebase # firebase or wilddog

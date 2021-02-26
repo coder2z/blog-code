@@ -98,5 +98,5 @@ go run spike.go //启动秒杀系统，支持横行扩展
 
 设计的东西还是比较多。直接看看源代码，应该还是能看懂。我项目的写的还是比较清楚的。感兴趣的可以看看。
 
-项目github地址：[https://github.com/myxy99/shopping](https://github.com/myxy99/shopping)
+项目github地址：[https://github.com/coder2m/shopping](https://github.com/coder2m/shopping)
 

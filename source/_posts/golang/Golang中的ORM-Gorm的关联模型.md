@@ -340,4 +340,4 @@ func TestGormManyToMany(t *testing.T) {
 ```
 参考连接：[https://gorm.io/zh_CN/docs/](https://gorm.io/zh_CN/docs/)
 
-文章代码地址：[https://github.com/myxy99/shopping/blob/master/test/gorm_test.go](https://github.com/myxy99/shopping/blob/master/test/gorm_test.go)
+文章代码地址：[https://github.com/coder2m/shopping/blob/master/test/gorm_test.go](https://github.com/coder2m/shopping/blob/master/test/gorm_test.go)

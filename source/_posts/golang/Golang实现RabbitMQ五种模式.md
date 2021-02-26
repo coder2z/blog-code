@@ -765,4 +765,4 @@ func main()  {
 
 ```
 
-GitHub地址：[https://github.com/myxy99/Go-RabbitMQ](https://github.com/myxy99/Go-RabbitMQ)
+GitHub地址：[https://github.com/coder2m/Go-RabbitMQ](https://github.com/coder2m/Go-RabbitMQ)

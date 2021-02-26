@@ -70,4 +70,4 @@ go run main.go
 micro api --handler=http
 ```
 
-项目地址：[https://github.com/myxy99/go-chat](https://github.com/myxy99/go-chat)
+项目地址：[https://github.com/coder2m/go-chat](https://github.com/coder2m/go-chat)

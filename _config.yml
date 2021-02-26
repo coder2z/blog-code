@@ -100,7 +100,7 @@ theme: material
 deploy:
 - type: git
   repository:
-    github: https://github.com/myxy99/myxy99.github.io.git  # 这是原来的 github 配置
+    github: https://github.com/coder2m/myxy99.github.io.git  # 这是原来的 github 配置
   branch: master
   extend_dirs: /source/.github
 - type: baidu_url_submitter                         # 这是新加的主动推送

@@ -225,6 +225,6 @@ func main() {
 
 参考连接:[https://github.com/gocolly/colly](https://github.com/gocolly/colly)
 
-源码地址:[https://github.com/myxy99/weixin-blog](https://github.com/myxy99/weixin-blog)
+源码地址:[https://github.com/coder2m/weixin-blog](https://github.com/coder2m/weixin-blog)
 
 

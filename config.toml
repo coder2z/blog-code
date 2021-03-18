@@ -19,6 +19,7 @@ pygmentsCodeFences = false
 pygmentsCodefencesGuessSyntax = false
 
 [params]
+gtagId = "G-1W3V0HZELM"
 title = "I'm Coder2z"
 author = "Coder2z"
 copyright = "2019-2021"
@@ -68,6 +69,12 @@ url = "https://github.com/Coder2z"
 icon = "fas fa-envelope"
 title = "e-mail"
 url = "mailto:Coder2z@qq.com"
+
+[params.utterances]
+repo = "coder2z/coder2z.github.io"
+issueTerm = "pathname"
+theme= "pgithub-dark"
+label = "comment"
 
 ## Menu items
 

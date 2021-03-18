@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | Golang使用jwt </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/golang%E4%BD%BF%E7%94%A8jwt/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Golang使用jwt"/>
+<meta name="twitter:description" content="Golang中使用JWT(json web token) 什么是jwt 什么是jwt这里就不多说了，官网有介绍。官网介绍：https://jwt.io/introduction/
+使用步骤 下载依赖包 go get -u github."/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>Golang使用jwt</h3>
+                
+            </div>
+
+            <h1 id="golang中使用jwtjson-web-token">Golang中使用JWT(json web token)</h1>
+<h2 id="什么是jwt">什么是jwt</h2>
+<p>什么是jwt这里就不多说了，官网有介绍。官网介绍：<a href="https://jwt.io/introduction/">https://jwt.io/introduction/</a></p>
+<h2 id="使用步骤">使用步骤</h2>
+<h3 id="下载依赖包">下载依赖包</h3>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="k">go</span> <span class="nx">get</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">dgrijalva</span><span class="o">/</span><span class="nx">jwt</span><span class="o">-</span><span class="k">go</span>
+
+</code></pre></div><h3 id="编写代码">编写代码</h3>
+<h4 id="配置文件">配置文件</h4>
+<div class="highlight"><pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[jwt]</span>
+<span class="c1"># 盐</span>
+<span class="na">JwtSecret</span> <span class="o">=</span> <span class="s">jdnsakjbduiiudu</span>
+<span class="c1"># 过期时间（天</span>
+<span class="na">ExpiresAt</span> <span class="o">=</span> <span class="s">3</span>
+<span class="c1"># 签发</span>
+<span class="na">Issuer</span> <span class="o">=</span> <span class="s">jwt</span>
+
+</code></pre></div><h4 id="golang代码">golang代码</h4>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">Utils</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;errors&#34;</span>
+	<span class="s">&#34;github.com/dgrijalva/jwt-go&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+	<span class="s">&#34;wPan/v1/Config&#34;</span> <span class="c1">//加载配置
+</span><span class="c1"></span>	<span class="s">&#34;wPan/v1/Models&#34;</span> <span class="c1">//加载模型
+</span><span class="c1"></span><span class="p">)</span>
+
+<span class="c1">// JWT 签名结构
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">JWT</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">SigningKey</span> <span class="p">[]</span><span class="kt">byte</span>
+<span class="p">}</span>
+
+<span class="c1">//JWT 中存储得数据结构体 这里可以根据需求自由添加
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">UserInfo</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Id</span>       <span class="kt">int</span>    <span class="s">`json:&#34;id&#34;`</span>
+	<span class="nx">Username</span> <span class="kt">string</span> <span class="s">`json:&#34;username&#34;`</span>
+	<span class="nx">Email</span>    <span class="kt">string</span> <span class="s">`json:&#34;email&#34;`</span>
+	<span class="nx">Status</span>   <span class="kt">int</span>    <span class="s">`json:&#34;status&#34;`</span>
+<span class="p">}</span>
+
+<span class="c1">// 生成JWT函数
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GenerateToken</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">Models</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">claim</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">MapClaims</span><span class="p">{</span>
+		<span class="c1">//这里为自定义
+</span><span class="c1"></span>		<span class="s">&#34;username&#34;</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">UserName</span><span class="p">,</span>
+		<span class="s">&#34;id&#34;</span><span class="p">:</span>       <span class="nx">user</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+		<span class="s">&#34;email&#34;</span><span class="p">:</span>    <span class="nx">user</span><span class="p">.</span><span class="nx">Email</span><span class="p">,</span>
+		<span class="s">&#34;status&#34;</span><span class="p">:</span>   <span class="nx">user</span><span class="p">.</span><span class="nx">Status</span><span class="p">,</span>
+		<span class="c1">//到这里，后面都是必须的
+</span><span class="c1"></span>		<span class="s">&#34;nbf&#34;</span><span class="p">:</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">(),</span>
+		<span class="s">&#34;iat&#34;</span><span class="p">:</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">(),</span>
+		<span class="c1">//设置过期时间
+</span><span class="c1"></span>		<span class="s">&#34;exp&#34;</span><span class="p">:</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">()</span> <span class="o">+</span> <span class="nx">Config</span><span class="p">.</span><span class="nx">JWTSetting</span><span class="p">.</span><span class="nx">ExpiresAt</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">,</span>
+		<span class="c1">//签名方
+</span><span class="c1"></span>		<span class="s">&#34;iss&#34;</span><span class="p">:</span> <span class="nx">Config</span><span class="p">.</span><span class="nx">JWTSetting</span><span class="p">.</span><span class="nx">Issuer</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">token</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">NewWithClaims</span><span class="p">(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">SigningMethodHS256</span><span class="p">,</span> <span class="nx">claim</span><span class="p">)</span>
+	<span class="nx">tokens</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">token</span><span class="p">.</span><span class="nf">SignedString</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">Config</span><span class="p">.</span><span class="nx">JWTSetting</span><span class="p">.</span><span class="nx">JwtSecret</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nx">tokens</span><span class="p">,</span> <span class="nx">err</span>
+<span class="p">}</span>
+
+<span class="c1">//设置盐
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">secret</span><span class="p">()</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">Keyfunc</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">token</span> <span class="o">*</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Token</span><span class="p">)</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">Config</span><span class="p">.</span><span class="nx">JWTSetting</span><span class="p">.</span><span class="nx">JwtSecret</span><span class="p">),</span> <span class="kc">nil</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//token 验证
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">ParseToken</span><span class="p">(</span><span class="nx">tokens</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">UserInfo</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">user</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">UserInfo</span><span class="p">{}</span>
+	<span class="nx">token</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="nx">tokens</span><span class="p">,</span> <span class="nf">secret</span><span class="p">())</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">claim</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">.(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">MapClaims</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+		<span class="nx">err</span> <span class="p">=</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;cannot convert claim to mapclaim&#34;</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="c1">//验证token，如果token被修改过则为false
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">!</span><span class="nx">token</span><span class="p">.</span><span class="nx">Valid</span> <span class="p">{</span>
+		<span class="nx">err</span> <span class="p">=</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;token is invalid&#34;</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="c1">//提取当初我们生成时候存储的数据
+</span><span class="c1"></span>	<span class="nx">user</span><span class="p">.</span><span class="nx">Id</span> <span class="p">=</span> <span class="nb">int</span><span class="p">(</span><span class="nx">claim</span><span class="p">[</span><span class="s">&#34;id&#34;</span><span class="p">].(</span><span class="kt">float64</span><span class="p">))</span>
+	<span class="nx">user</span><span class="p">.</span><span class="nx">Username</span> <span class="p">=</span> <span class="nx">claim</span><span class="p">[</span><span class="s">&#34;username&#34;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+	<span class="nx">user</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">claim</span><span class="p">[</span><span class="s">&#34;email&#34;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+	<span class="nx">user</span><span class="p">.</span><span class="nx">Status</span> <span class="p">=</span> <span class="nb">int</span><span class="p">(</span><span class="nx">claim</span><span class="p">[</span><span class="s">&#34;status&#34;</span><span class="p">].(</span><span class="kt">float64</span><span class="p">))</span>
+
+	<span class="k">return</span>
+<span class="p">}</span>
+
+</code></pre></div><p>Service中的使用</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">GetJwt</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">Models</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">token</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">Utils</span><span class="p">.</span><span class="nf">GenerateToken</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="kc">false</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">token</span><span class="p">,</span> <span class="kc">true</span>
+<span class="p">}</span>
+
+</code></pre></div><h4 id="编写验证中间件">编写验证中间件</h4>
+<p>我这里使用的gin框架，其他的框架也类似</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">Auth</span><span class="p">()</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">token</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">GetHeader</span><span class="p">(</span><span class="s">&#34;Authorization&#34;</span><span class="p">)</span>
+		<span class="nx">userInfo</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">Utils</span><span class="p">.</span><span class="nf">ParseToken</span><span class="p">(</span><span class="nx">token</span><span class="p">[</span><span class="mi">7</span><span class="p">:])</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">R</span><span class="p">.</span><span class="nf">Response</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span> <span class="nx">R</span><span class="p">.</span><span class="nx">AUTH_ERROR</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">Abort</span><span class="p">()</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;userInfo&#34;</span><span class="p">,</span> <span class="nx">userInfo</span><span class="p">)</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h4 id="路由中使用">路由中使用</h4>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">authApi</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/info&#34;</span><span class="p">,</span> <span class="nx">Middleware</span><span class="p">.</span><span class="nf">Auth</span><span class="p">(),</span> <span class="nx">Controllers</span><span class="p">.</span><span class="nx">Info</span><span class="p">)</span>
+
+</code></pre></div><p>这样用户再访问需要验证的请求时，就需要请求头中带上<code>Authorization</code>，value为token。</p>
+<p>参考连接：<a href="https://github.com/dgrijalva/jwt-go">https://github.com/dgrijalva/jwt-go</a></p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/golang/">golang</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/golang/">golang</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

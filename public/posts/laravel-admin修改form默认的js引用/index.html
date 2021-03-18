@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | laravel-admin修改form默认的js引用 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/laravel-admin%E4%BF%AE%E6%94%B9form%E9%BB%98%E8%AE%A4%E7%9A%84js%E5%BC%95%E7%94%A8/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="laravel-admin修改form默认的js引用"/>
+<meta name="twitter:description" content="解决laravel-admin中form表单下拉框不是中文问题 最近在使用laravel-admin开发得时候。在做表单提交的时候发现默认的提醒为英文的这里我就想能不能设置为中文： 然后我就在线怎么操作能够改为中文，我这里通过了通过在开发工具中搜索，我发现这里的渲染为js进行的： 这里我发现在对应得文件夹中也有中文版本得js只是没有使用上： 所以这里我就在想怎么修改默认的js路径，于是我开始使用开发工具继续搜索这个js名 结果在这个文件中发现了js的设置，现在就要想怎么修改他了，直接修改他的源代码肯定是不行的，所以这里我想的就是继承这个类在进行重写变量赋值。 现在的问题就是怎么让我们的类生效了，查看了官方文档发现只需要在bootstrap中注册就行了 现在再查看下页面就变成中文了 这里其实就是一个小问题，但是主要是再发现问题得时候，怎么一步一步得找到问题，进行解决。记录一下这个思路 参考连接：https://laravel-admin.org/docs/zh"/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>laravel-admin修改form默认的js引用</h3>
+                
+            </div>
+
+            <h1 id="解决laravel-admin中form表单下拉框不是中文问题">解决laravel-admin中form表单下拉框不是中文问题</h1>
+<h4 id="最近在使用laravel-admin开发得时候在做表单提交的时候发现默认的提醒为英文的这里我就想能不能设置为中文">最近在使用laravel-admin开发得时候。在做表单提交的时候发现默认的提醒为英文的这里我就想能不能设置为中文：</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716103834.png" alt=""></p>
+<h4 id="然后我就在线怎么操作能够改为中文我这里通过了通过在开发工具中搜索我发现这里的渲染为js进行的">然后我就在线怎么操作能够改为中文，我这里通过了通过在开发工具中搜索，我发现这里的渲染为js进行的：</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716104007.png" alt=""></p>
+<h4 id="这里我发现在对应得文件夹中也有中文版本得js只是没有使用上">这里我发现在对应得文件夹中也有中文版本得js只是没有使用上：</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716104113.png" alt=""></p>
+<h4 id="所以这里我就在想怎么修改默认的js路径于是我开始使用开发工具继续搜索这个js名">所以这里我就在想怎么修改默认的js路径，于是我开始使用开发工具继续搜索这个js名</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716104335.png" alt=""></p>
+<h4 id="结果在这个文件中发现了js的设置现在就要想怎么修改他了直接修改他的源代码肯定是不行的所以这里我想的就是继承这个类在进行重写变量赋值">结果在这个文件中发现了js的设置，现在就要想怎么修改他了，直接修改他的源代码肯定是不行的，所以这里我想的就是继承这个类在进行重写变量赋值。</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716104425.png" alt=""></p>
+<h4 id="现在的问题就是怎么让我们的类生效了查看了官方文档发现只需要在bootstrap中注册就行了">现在的问题就是怎么让我们的类生效了，查看了官方文档发现只需要在bootstrap中注册就行了</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716104458.png" alt=""></p>
+<h4 id="现在再查看下页面就变成中文了">现在再查看下页面就变成中文了</h4>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/16/20200716104532.png" alt=""></p>
+<h4 id="这里其实就是一个小问题但是主要是再发现问题得时候怎么一步一步得找到问题进行解决记录一下这个思路">这里其实就是一个小问题，但是主要是再发现问题得时候，怎么一步一步得找到问题，进行解决。记录一下这个思路</h4>
+<p>参考连接：<a href="https://laravel-admin.org/docs/zh">https://laravel-admin.org/docs/zh</a></p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/php/">php</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/laravel/">laravel</a><a class="tag" href="/tags/laravel-admin/">laravel-admin</a><a class="tag" href="/tags/php/">php</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

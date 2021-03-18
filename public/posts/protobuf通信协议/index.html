@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | Protobuf通信协议 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/protobuf%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Protobuf通信协议"/>
+<meta name="twitter:description" content="RPC的调用过程 一个正常的RPC过程可以分为一下几个步骤：
+ client调用client stub，这是一次本地过程调用。 client stub将参数打包成一个消息，然后发送这个消息。打包过程也叫做marshalling。 client所在的系统将消息发送给server。 server的的系统将收到的包传给server stub。 server stub解包得到参数。 解包也被称作 unmarshalling。 server stub调用服务过程。返回结果按照相反的步骤传给client。  在上述的步骤实现远程接口调用时，所需要执行的函数是存在于远程机器中，即函数是在另外一个进程中执行的。因此，就带来了几个新问题："/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>Protobuf通信协议</h3>
+                
+            </div>
+
+            <h1 id="rpc的调用过程">RPC的调用过程</h1>
+<p>一个正常的RPC过程可以分为一下几个步骤：</p>
+<ul>
+<li>client调用client stub，这是一次本地过程调用。</li>
+<li>client stub将参数打包成一个消息，然后发送这个消息。打包过程也叫做marshalling。</li>
+<li>client所在的系统将消息发送给server。</li>
+<li>server的的系统将收到的包传给server stub。</li>
+<li>server stub解包得到参数。 解包也被称作 unmarshalling。</li>
+<li>server stub调用服务过程。返回结果按照相反的步骤传给client。</li>
+</ul>
+<p>在上述的步骤实现远程接口调用时，所需要执行的函数是存在于远程机器中，即函数是在另外一个进程中执行的。因此，就带来了几个新问题：</p>
+<ul>
+<li>1、Call ID映射。远端进程中间可以包含定义的多个函数，本地客户端该如何告知远端进程程序调用特定的某个函数呢？因此，在RPC调用过程中，所有的函数都需要有一个自己的ID。开发者在客户端（调用端）和服务端（被调用端）分别维护一个{函数&lt;–&gt;Call ID}的对应表。两者的表不一定完全相同，但是相同的函数对应的Call ID必须相同。当客户端需要进行远程调用时，调用者通过映射表查询想要调用的函数的名称，找到对应的Call ID，然后传递给服务端，服务端也通过查表，来确定客户端所需要调用的函数，然后执行相应函数的代码。</li>
+<li>2、序列化与反序列化。客户端如何把参数传递给远程调用的函数呢？在本地调用中，我们只需要把参数压到栈里，然后让函数自己去栈里读就行。但是在远程过程调用时，客户端跟服务端是不同的进程，不能通过内存来传递参数。甚至有时候客户端和服务端使用的都不是同一种语言（比如服务端用C++，客户端用Java或者Python）。这时候就需要客户端把参数先转成一个字节流，传给服务端后，再把字节流转成自己能读取的格式。这个过程叫序列化和反序列化。同理，从服务端返回的值也需要序列化反序列化的过程。</li>
+<li>3、网络传输。远程调用往往用在网络上，客户端和服务端是通过网络连接的。所有的数据都需要通过网络传输，因此就需要有一个网络传输层。网络传输层需要把Call ID和序列化后的参数字节流传递给服务端，然后在把序列化后的调用结果传回给客户端，完成这种数据传递功能的被成为传输层。大部分的网络传输成都使用TCP协议，属于长连接。</li>
+</ul>
+<p>有对传递的数据进行序列化和反序列化的操作，这就是我们这里要说的：Protobuf。</p>
+<h1 id="简介">简介</h1>
+<p>Google Protocol Buffer( 简称 Protobuf)是Google公司内部的混合语言数据标准，他们主要用于RPC系统和持续数据存储系统。</p>
+<p>Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或RPC数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。简单来说，Protobuf的功能类似于XML，即负责把某种数据结构的信息，以某种格式保存起来。主要用于数据存储、传输协议等使用场景。</p>
+<h1 id="安装">安装</h1>
+<h2 id="安装protobuf编译器">安装protobuf编译器</h2>
+<p>可以在如下地址：<a href="https://github.com/protocolbuffers/protobuf/releases">https://github.com/protocolbuffers/protobuf/releases</a>选择适合自己系统的Proto编译器程序进行下载并解压。然后配置环境变量：将protocke执行文件所在目录添加到当前系统的环境变量中。windows系统下可以直接在Path目录中进行添加。</p>
+<h2 id="安装go依赖">安装go依赖</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">golang</span><span class="o">/</span><span class="nx">protobuf</span><span class="o">/</span><span class="nx">protoc</span><span class="o">-</span><span class="nx">gen</span><span class="o">-</span><span class="k">go</span>
+
+</code></pre></div><h1 id="protobuf-协议语法">Protobuf 协议语法</h1>
+<h2 id="message">message：</h2>
+<p>Protobuf中定义一个数据结构需要用到关键字message，这一点和Java的class，Go语言中的struct类似。</p>
+<h2 id="标识号">标识号：</h2>
+<p>在消息的定义中，每个字段等号后面都有唯一的标识号，用于在反序列化过程中识别各个字段的，一旦开始使用就不能改变。标识号从整数1开始，依次递增，每次增加1，标识号的范围为1~2^29 – 1，其中[19000-19999]为Protobuf协议预留字段，开发者不建议使用该范围的标识号；一旦使用，在编译时Protoc编译器会报出警告。</p>
+<h2 id="字段规则">字段规则：</h2>
+<p>字段规则有三种：</p>
+<ul>
+<li>1.required：该规则规定，消息体中该字段的值是必须要设置的。</li>
+<li>2.optional：消息体中该规则的字段的值可以存在，也可以为空，optional的字段可以根据defalut设置默认值。</li>
+<li>3.repeated：消息体中该规则字段可以存在多个（包括0个），该规则对应java的数组或者go语言的slice。</li>
+</ul>
+<h2 id="数据类型">数据类型：</h2>
+<p>常见的数据类型与protoc协议中的数据类型映射如下：
+<img src="https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712161553.png" alt=""></p>
+<h2 id="枚举类型">枚举类型：</h2>
+<p>proto协议支持使用枚举类型</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">enum</span> <span class="nx">Sex</span><span class="p">{</span>
+    <span class="nx">male</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="nx">female</span><span class="p">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="字段默认值">字段默认值：</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">message</span> <span class="nx">Address</span> <span class="p">{</span>
+    <span class="nx">required</span> <span class="nx">sint32</span> <span class="nx">id</span> <span class="p">=</span> <span class="mi">1</span> <span class="p">[</span><span class="k">default</span> <span class="p">=</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="nx">required</span> <span class="kt">string</span> <span class="nx">name</span> <span class="p">=</span> <span class="mi">2</span> <span class="p">[</span><span class="k">default</span> <span class="p">=</span> <span class="err">&#39;</span><span class="nx">北京</span><span class="err">&#39;</span><span class="p">];</span>
+    <span class="nx">optional</span> <span class="kt">string</span> <span class="nx">pinyin</span> <span class="p">=</span> <span class="mi">3</span> <span class="p">[</span><span class="k">default</span> <span class="p">=</span> <span class="err">&#39;</span><span class="nx">beijing</span><span class="err">&#39;</span><span class="p">];</span>
+    <span class="nx">required</span> <span class="kt">string</span> <span class="nx">address</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="nx">required</span> <span class="kt">bool</span> <span class="nx">flag</span> <span class="p">=</span> <span class="mi">5</span> <span class="p">[</span><span class="k">default</span> <span class="p">=</span> <span class="kc">true</span><span class="p">];</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="导入">导入</h2>
+<p>如果需要引用的message是写在别的.proto文件中，可以通过import &ldquo;xxx.proto&quot;来进行引入</p>
+<h2 id="嵌套">嵌套</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">syntax</span> <span class="p">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nx">example</span><span class="p">;</span>
+<span class="nx">message</span> <span class="nx">Person</span> <span class="p">{</span>
+    <span class="nx">required</span> <span class="kt">string</span> <span class="nx">Name</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">required</span> <span class="kt">int32</span> <span class="nx">Age</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nx">required</span> <span class="kt">string</span> <span class="nx">From</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="nx">optional</span> <span class="nx">Address</span> <span class="nx">Addr</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="nx">message</span> <span class="nx">Address</span> <span class="p">{</span>
+        <span class="nx">required</span> <span class="nx">sint32</span> <span class="nx">id</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nx">required</span> <span class="kt">string</span> <span class="nx">name</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="nx">optional</span> <span class="kt">string</span> <span class="nx">pinyin</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="nx">required</span> <span class="kt">string</span> <span class="nx">address</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id="生成文件">生成文件</h1>
+<p>这里看你，需要使用什么语言的，如果你需要再c和py之间传输数据，你就需要生成对应的c和py文件，就行。这里我因为使用的golang。我就生成go的</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">protoc</span> <span class="o">--</span><span class="nx">go_out</span><span class="p">=.</span> <span class="o">*</span><span class="p">.</span><span class="nx">proto</span>
+
+</code></pre></div><h2 id="这里推荐下几个插件golang">这里推荐下几个插件（golang）</h2>
+<ul>
+<li>
+<p>protoc-gen-gogo：和protoc-gen-go生成的文件差不多，性能也几乎一样(稍微快一点点)</p>
+</li>
+<li>
+<p>protoc-gen-gofast：生成的文件更复杂，性能也更高(快5-7倍)</p>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//gogo
+</span><span class="c1"></span><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">gogo</span><span class="o">/</span><span class="nx">protobuf</span><span class="o">/</span><span class="nx">protoc</span><span class="o">-</span><span class="nx">gen</span><span class="o">-</span><span class="nx">gogo</span>
+
+<span class="c1">//gofast
+</span><span class="c1"></span><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">gogo</span><span class="o">/</span><span class="nx">protobuf</span><span class="o">/</span><span class="nx">protoc</span><span class="o">-</span><span class="nx">gen</span><span class="o">-</span><span class="nx">gofast</span>
+
+</code></pre></div><p>安装gogoprotobuf库文件</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">gogo</span><span class="o">/</span><span class="nx">protobuf</span><span class="o">/</span><span class="nx">proto</span>
+<span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">gogo</span><span class="o">/</span><span class="nx">protobuf</span><span class="o">/</span><span class="nx">gogoproto</span>  <span class="c1">//这个不装也没关系
+</span><span class="c1"></span>
+</code></pre></div><p>生成文件</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//gogo
+</span><span class="c1"></span><span class="nx">protoc</span> <span class="o">--</span><span class="nx">gogo_out</span><span class="p">=.</span> <span class="o">*</span><span class="p">.</span><span class="nx">proto</span>
+
+<span class="c1">//gofast
+</span><span class="c1"></span><span class="nx">protoc</span> <span class="o">--</span><span class="nx">gofast_out</span><span class="p">=.</span> <span class="o">*</span><span class="p">.</span><span class="nx">proto</span>
+
+</code></pre></div><p>性能测试</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//goprotobuf
+</span><span class="c1"></span><span class="s">&#34;编码&#34;</span><span class="err">：</span><span class="mi">447</span><span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="s">&#34;解码&#34;</span><span class="err">：</span><span class="mi">422</span><span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+
+<span class="c1">//gogoprotobuf-go
+</span><span class="c1"></span><span class="s">&#34;编码&#34;</span><span class="err">：</span><span class="mi">433</span><span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="s">&#34;解码&#34;</span><span class="err">：</span><span class="mi">427</span><span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+
+<span class="c1">//gogoprotobuf-fast
+</span><span class="c1"></span><span class="s">&#34;编码&#34;</span><span class="err">：</span><span class="mi">112</span><span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+<span class="s">&#34;解码&#34;</span><span class="err">：</span><span class="mi">112</span><span class="nx">ns</span><span class="o">/</span><span class="nx">op</span>
+
+</code></pre></div><h1 id="使用">使用</h1>
+<h2 id="发送消息">发送消息</h2>
+<p>把消息进行编码</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang">
+<span class="nx">book</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">pb</span><span class="p">.</span><span class="nx">AddressBook</span><span class="p">{}</span>
+<span class="c1">// ...
+</span><span class="c1"></span>
+<span class="nx">out</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">proto</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">book</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="s">&#34;Failed to encode address book:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="nx">fname</span><span class="p">,</span> <span class="nx">out</span><span class="p">,</span> <span class="mo">0644</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="s">&#34;Failed to write address book:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="接收消息">接收消息</h2>
+<p>把消息进行解码</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">in</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="nx">fname</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="s">&#34;Error reading file:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">book</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">pb</span><span class="p">.</span><span class="nx">AddressBook</span><span class="p">{}</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">proto</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">in</span><span class="p">,</span> <span class="nx">book</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="s">&#34;Failed to parse address book:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div><p>参考连接：<a href="https://developers.google.com/protocol-buffers/docs/gotutorial">https://developers.google.com/protocol-buffers/docs/gotutorial</a></p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/golang/">golang</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/protobuf/">protobuf</a><a class="tag" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><a class="tag" href="/tags/rpc/">rpc</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

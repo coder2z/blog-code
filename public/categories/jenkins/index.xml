@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jenkins on Coder2z Blog</title>
+    <link>http://myxy99.cn/categories/jenkins/</link>
+    <description>Recent content in jenkins on Coder2z Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Jun 2020 14:46:27 +0800</lastBuildDate><atom:link href="http://myxy99.cn/categories/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jenkins插件安装提速</title>
+      <link>http://myxy99.cn/posts/jenkins%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8F%90%E9%80%9F/</link>
+      <pubDate>Tue, 23 Jun 2020 14:46:27 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/jenkins%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8F%90%E9%80%9F/</guid>
+      <description>操作步骤 配置Json其实在Jenkins的工作目录中
+cd {你的Jenkins工作目录}/updates #进入更新配置位置 第一种方式：使用vim vim default.json 使用vim的命令，如下，替换所有插件下载的url
+:1,$s/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g 替换连接测试url</description>
+    </item>
+    
+  </channel>
+</rss>

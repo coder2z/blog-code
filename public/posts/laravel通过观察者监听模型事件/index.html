@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | laravel通过观察者监听模型事件 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/laravel%E9%80%9A%E8%BF%87%E8%A7%82%E5%AF%9F%E8%80%85%E7%9B%91%E5%90%AC%E6%A8%A1%E5%9E%8B%E4%BA%8B%E4%BB%B6/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="laravel通过观察者监听模型事件"/>
+<meta name="twitter:description" content="所有支持的模型事件 在 Eloquent 模型类上进行查询、插入、更新、删除操作时，会触发相应的模型事件（关于事件我们后面会单独讲），不管你有没有监听它们。这些事件包括：
+   方法名 说明     retrieved 获取到模型实例后触发   creating 插入到数据库前触发   created 插入到数据库后触发   updating 更新到数据库前触发   updated 更新到数据库后触发   saving 保存到数据库前触发（插入/更新之前，无论插入还是更新都会触发）   saved 保存到数据库后触发（插入/更新之后，无论插入还是更新都会触发）   deleting 从数据库删除记录前触发   deleted 从数据库删除记录后触发   restoring 恢复软删除记录前触发   restored 恢复软删除记录后触发    通过观察者监听模型事件 针对模型事件这种特殊的事件类型，Laravel 还为我们提供了观察者类来处理模型事件的监听。观察者可以看作是上述订阅者处理模型事件的简化版本，我们不需要自定义事件类，不需要建立映射关系，只需要在观察者类中将需要监听的事件定义为同名方法，并在相应方法中编写业务处理代码即可。当某个模型事件触发时，Eloquent 底层会去该模型上注册的观察者类中通过反射查找是否定义了对应的方法，如果定义了则执行相应的逻辑，否则忽略。"/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>laravel通过观察者监听模型事件</h3>
+                
+            </div>
+
+            <h1 id="所有支持的模型事件">所有支持的模型事件</h1>
+<p>在 Eloquent 模型类上进行查询、插入、更新、删除操作时，会触发相应的模型事件（关于事件我们后面会单独讲），不管你有没有监听它们。这些事件包括：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>retrieved</td>
+<td>获取到模型实例后触发</td>
+</tr>
+<tr>
+<td>creating</td>
+<td>插入到数据库前触发</td>
+</tr>
+<tr>
+<td>created</td>
+<td>插入到数据库后触发</td>
+</tr>
+<tr>
+<td>updating</td>
+<td>更新到数据库前触发</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新到数据库后触发</td>
+</tr>
+<tr>
+<td>saving</td>
+<td>保存到数据库前触发（插入/更新之前，无论插入还是更新都会触发）</td>
+</tr>
+<tr>
+<td>saved</td>
+<td>保存到数据库后触发（插入/更新之后，无论插入还是更新都会触发）</td>
+</tr>
+<tr>
+<td>deleting</td>
+<td>从数据库删除记录前触发</td>
+</tr>
+<tr>
+<td>deleted</td>
+<td>从数据库删除记录后触发</td>
+</tr>
+<tr>
+<td>restoring</td>
+<td>恢复软删除记录前触发</td>
+</tr>
+<tr>
+<td>restored</td>
+<td>恢复软删除记录后触发</td>
+</tr>
+</tbody>
+</table>
+<h1 id="通过观察者监听模型事件">通过观察者监听模型事件</h1>
+<p>针对模型事件这种特殊的事件类型，Laravel 还为我们提供了观察者类来处理模型事件的监听。观察者可以看作是上述订阅者处理模型事件的简化版本，我们不需要自定义事件类，不需要建立映射关系，只需要在观察者类中将需要监听的事件定义为同名方法，并在相应方法中编写业务处理代码即可。当某个模型事件触发时，Eloquent 底层会去该模型上注册的观察者类中通过反射查找是否定义了对应的方法，如果定义了则执行相应的逻辑，否则忽略。</p>
+<h2 id="创建观察者">创建观察者</h2>
+<p>首先，我们通过 Artisan命令初始化针对 User 模型的观察者：（laravel 5.8以上）</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">php artisan make:observer UserObserver --model<span class="o">=</span>User
+
+</code></pre></div><h2 id="编写处理代码">编写处理代码</h2>
+<p>默认生成的 UserObserver 会为 created、 updated、deleted、restored、forceDeleted（强制删除） 事件定义一个空方法。</p>
+<p>你可以把前面定义的retrived、deleting、deleted 事件监听代码迁移过来，也可以将不需监听的事件方法移除，这里我们将编写保存模型时涉及的模型事件，包括 saving、creating、updating、updated、created、saved：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">namespace</span> <span class="nx">App\Observers</span><span class="p">;</span> 
+<span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Log</span><span class="p">;</span>
+<span class="nx">classUserObserver</span><span class="p">{</span> 
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">saving</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">){</span>
+       <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;即将保存用户到数据库[&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="o">.</span><span class="s1">&#39;]&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+       <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">creating</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">){</span>
+       <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;即将插入用户到数据库[&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="o">.</span><span class="s1">&#39;]&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+       <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">updating</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">){</span>
+      <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;即将更新用户到数据库[&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="o">.</span><span class="s1">&#39;]&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">updated</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">){</span>
+      <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;已经更新用户到数据库[&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="o">.</span><span class="s1">&#39;]&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">created</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">){</span>
+     <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;已经插入用户到数据库[&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="o">.</span><span class="s1">&#39;]&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+     <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">saved</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">){</span>
+     <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;已经保存用户到数据库[&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="o">.</span><span class="s1">&#39;]&#39;</span><span class="o">.</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+</code></pre></div><h2 id="注册">注册</h2>
+<p>编写好观察者后，需要将其注册到 User 模型上才能生效，我们可以在 EventServiceProvider 的 boot 方法中完成该工作：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">(){</span> 
+    <span class="k">parent</span><span class="o">::</span><span class="na">boot</span><span class="p">();</span>    
+    <span class="nx">User</span><span class="o">::</span><span class="na">observe</span><span class="p">(</span><span class="nx">UserObserver</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="测试">测试</h2>
+<p>测试观察者监听模型事件。我们先编写一段添加新用户的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$user</span><span class="o">=</span><span class="k">new</span> <span class="nx">User</span><span class="p">();</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">=</span><span class="s1">&#39;test1&#39;</span><span class="p">;</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">=</span><span class="s1">&#39;239999@qq.com&#39;</span><span class="p">;</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">=</span><span class="nx">bcrypt</span><span class="p">(</span><span class="s1">&#39;123456&#39;</span><span class="p">);</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+
+</code></pre></div><p>执行上述代码后，即可在日志文件中看到相应的日志记录：</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">[2019-11-13 10:30:00] local.INFO: 即将保存用户到数据库[]test1  
+[2019-11-13 10:30:00] local.INFO: 即将插入用户到数据库[]test1  
+[2019-11-13 10:30:00] local.INFO: 已经插入用户到数据库[19]test1  
+[2019-11-13 10:30:00] local.INFO: 已经保存用户到数据库[19]test1  
+
+</code></pre></div><p>编写一段更新已存在用户的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$user</span><span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">findOrFail</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">=</span><span class="s1">&#39;test2&#39;</span><span class="p">;</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+
+</code></pre></div><p>执行上述代码，对应的日志记录如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">[2019-11-13 10:33:00] local.INFO: 从模型中获取用户[15]:Miss Lucile Langosh V  
+[2019-11-13 10:33:00] local.INFO: 即将保存用户到数据库[15]test2 
+[2019-11-13 10:33:00] local.INFO: 即将更新用户到数据库[15]test2  
+[2019-11-13 10:33:00] local.INFO: 已经更新用户到数据库[15]test2 
+[2019-11-13 10:33:00] local.INFO: 已经保存用户到数据库[15]test2
+
+</code></pre></div></div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/php/">php</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/php/">php</a><a class="tag" href="/tags/laravel/">laravel</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on Coder2z Blog</title>
+    <link>http://myxy99.cn/tags/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on Coder2z Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Jul 2020 13:23:46 +0800</lastBuildDate><atom:link href="http://myxy99.cn/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>单链表中间节点</title>
+      <link>http://myxy99.cn/posts/%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Mon, 27 Jul 2020 13:23:46 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/</guid>
+      <description>单链表中间节点 方法一 首先先遍历一遍获得节点个数，然后取一半作计数器再次遍历。这个方法遍历了两次，是最慢的方法
+class Node: def __init__(self, data, next): self.data = data self.</description>
+    </item>
+    
+    <item>
+      <title>Golang实现一致性Hash算法</title>
+      <link>http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Thu, 09 Jul 2020 19:49:48 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%AE%97%E6%B3%95/</guid>
+      <description>什么是一致性Hash算法 一致性Hash算法是使用取模的方法，一致性Hash算法是对2^32取模，什么意思呢？简单来说，一致性Hash算法将整个哈希值空间组织成一个虚拟的圆环，如假设某哈希函数H的值空间为0-2^32-1（即哈希值是一个32位无符号整形），整个哈希环如下：
+圆环的正上方的点代表0，0点右侧的第一个点代表1，以此类推，2、3、4、5、6……直到2^32-1,也就是说0点左侧的第一个点代表2^32-1
+我们把这个由2的32次方个点组成的圆环称为hash环。
+假设我们有3台缓存服务器，服务器A、服务器B、服务器C，那么，在生产环境中，这三台服务器肯定有自己的IP地址，我们使用它们各自的IP地址进行哈希计算，使用哈希后的结果对2^32取模，可以使用如下公式示意
+ hash(服务器A的IP地址) % 2^32
+ 通过上述公式算出的结果一定是一个0到2^32-1之间的一个整数，我们就用算出的这个整数，代表服务器A，既然这个整数肯定处于0到2^32-1之间，那么，上图中的hash环上必定有一个点与这个整数对应，而我们刚才已经说明，使用这个整数代表服务器A，那么，服务器A就可以映射到这个环上，用下图示意</description>
+    </item>
+    
+    <item>
+      <title>Golang实现雪花算法</title>
+      <link>http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Tue, 16 Jun 2020 13:09:56 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</guid>
+      <description>雪花算法 雪花算法 雪花算法的原始版本是scala版，用于生成分布式ID（纯数字，时间顺序）,订单编号等 自增ID：对于数据敏感场景不宜使用，且不适合于分布式场景。 GUID：采用无意义字符串，数据量增大时造成访问过慢，且不宜排序。
+算法描述  最高位是符号位，始终为0，不可用。 41位的时间序列，精确到毫秒级，41位的长度可以使用69年。时间位还有一个很重要的作用是可以根据时间进行排序。 10位的机器标识，10位的长度最多支持部署1024个节点。 12位的计数序列号，序列号即一系列的自增id，可以支持同一节点同一毫秒生成多个ID序号，12位的计数序列号支持每个节点每毫秒产生4096个ID序号。  Golang 实现 package main import ( &amp;#34;errors&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;sync&amp;#34; &amp;#34;time&amp;#34; ) const ( workerBits uint8 = 10 numberBits uint8 = 12 workerMax int64 = -1 ^ (-1 &amp;lt;&amp;lt; workerBits) numberMax int64 = -1 ^ (-1 &amp;lt;&amp;lt; numberBits) timeShift uint8 = workerBits + numberBits workerShift uint8 = numberBits startTime int64 = 1525705533000 // 如果在程序跑了一段时间修改了epoch这个值 可能会导致生成相同的ID ) type Worker struct { mu sync.</description>
+    </item>
+    
+  </channel>
+</rss>

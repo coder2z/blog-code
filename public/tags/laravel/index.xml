@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>laravel on Coder2z Blog</title>
+    <link>http://myxy99.cn/tags/laravel/</link>
+    <description>Recent content in laravel on Coder2z Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 25 May 2020 10:11:13 +0800</lastBuildDate><atom:link href="http://myxy99.cn/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>laravel实现定时任务</title>
+      <link>http://myxy99.cn/posts/laravel%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link>
+      <pubDate>Mon, 25 May 2020 10:11:13 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/laravel%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid>
+      <description>laravel实现定时任务 原理是通过Cron
+Cron简介 Cron 是 UNIX、SOLARIS、LINUX 下的一个十分有用的工具，通过 Cron 脚本能使计划任务定期地在系统后台自动运行。这种计划任务在 UNIX、SOLARIS、LINUX下术语为 Cron Jobs。Crontab 则是用来记录在特定时间运行的 Cron 的一个脚本文件，Crontab 文件的每一行均遵守特定的格式：</description>
+    </item>
+    
+    <item>
+      <title>laravel-admin修改form默认的js引用</title>
+      <link>http://myxy99.cn/posts/laravel-admin%E4%BF%AE%E6%94%B9form%E9%BB%98%E8%AE%A4%E7%9A%84js%E5%BC%95%E7%94%A8/</link>
+      <pubDate>Fri, 22 May 2020 10:33:36 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/laravel-admin%E4%BF%AE%E6%94%B9form%E9%BB%98%E8%AE%A4%E7%9A%84js%E5%BC%95%E7%94%A8/</guid>
+      <description>解决laravel-admin中form表单下拉框不是中文问题 最近在使用laravel-admin开发得时候。在做表单提交的时候发现默认的提醒为英文的这里我就想能不能设置为中文： 然后我就在线怎么操作能够改为中文，我这里通过了通过在开发工具中搜索，我发现这里的渲染为js进行的： 这里我发现在对应得文件夹中也有中文版本得js只是没有使用上： 所以这里我就在想怎么修改默认的js路径，于是我开始使用开发工具继续搜索这个js名 结果在这个文件中发现了js的设置，现在就要想怎么修改他了，直接修改他的源代码肯定是不行的，所以这里我想的就是继承这个类在进行重写变量赋值。 现在的问题就是怎么让我们的类生效了，查看了官方文档发现只需要在bootstrap中注册就行了 现在再查看下页面就变成中文了 这里其实就是一个小问题，但是主要是再发现问题得时候，怎么一步一步得找到问题，进行解决。记录一下这个思路 参考连接：https://laravel-admin.org/docs/zh</description>
+    </item>
+    
+    <item>
+      <title>laravel通过观察者监听模型事件</title>
+      <link>http://myxy99.cn/posts/laravel%E9%80%9A%E8%BF%87%E8%A7%82%E5%AF%9F%E8%80%85%E7%9B%91%E5%90%AC%E6%A8%A1%E5%9E%8B%E4%BA%8B%E4%BB%B6/</link>
+      <pubDate>Wed, 20 May 2020 10:08:28 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/laravel%E9%80%9A%E8%BF%87%E8%A7%82%E5%AF%9F%E8%80%85%E7%9B%91%E5%90%AC%E6%A8%A1%E5%9E%8B%E4%BA%8B%E4%BB%B6/</guid>
+      <description>所有支持的模型事件 在 Eloquent 模型类上进行查询、插入、更新、删除操作时，会触发相应的模型事件（关于事件我们后面会单独讲），不管你有没有监听它们。这些事件包括：
+   方法名 说明     retrieved 获取到模型实例后触发   creating 插入到数据库前触发   created 插入到数据库后触发   updating 更新到数据库前触发   updated 更新到数据库后触发   saving 保存到数据库前触发（插入/更新之前，无论插入还是更新都会触发）   saved 保存到数据库后触发（插入/更新之后，无论插入还是更新都会触发）   deleting 从数据库删除记录前触发   deleted 从数据库删除记录后触发   restoring 恢复软删除记录前触发   restored 恢复软删除记录后触发    通过观察者监听模型事件 针对模型事件这种特殊的事件类型，Laravel 还为我们提供了观察者类来处理模型事件的监听。观察者可以看作是上述订阅者处理模型事件的简化版本，我们不需要自定义事件类，不需要建立映射关系，只需要在观察者类中将需要监听的事件定义为同名方法，并在相应方法中编写业务处理代码即可。当某个模型事件触发时，Eloquent 底层会去该模型上注册的观察者类中通过反射查找是否定义了对应的方法，如果定义了则执行相应的逻辑，否则忽略。</description>
+    </item>
+    
+    <item>
+      <title>laravel的Requests验证表单优化</title>
+      <link>http://myxy99.cn/posts/laravel%E7%9A%84requests%E9%AA%8C%E8%AF%81%E8%A1%A8%E5%8D%95%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sun, 10 May 2020 11:10:25 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/laravel%E7%9A%84requests%E9%AA%8C%E8%AF%81%E8%A1%A8%E5%8D%95%E4%BC%98%E5%8C%96/</guid>
+      <description>laravel的Requests验证表单优化 首先使用 artisan 建立 request php artisan make:request 方法名 就会在app/requests下生成对应文件名</description>
+    </item>
+    
+    <item>
+      <title>laravel中的路由模型绑定</title>
+      <link>http://myxy99.cn/posts/laravel%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A/</link>
+      <pubDate>Sat, 25 Apr 2020 09:48:12 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/laravel%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A/</guid>
+      <description>laravel中的路由模型绑定 在使用laravel进行开发的时候，会发现我们的控制器中多次出现了 $article = Article::findOrFail($id); 这一段代码。如果我们的程序能够自动找到 ID 对应的记录，并让 Laravel 自动查询，这是不是非常的棒？这就是路由模型绑定会做到的事情。</description>
+    </item>
+    
+    <item>
+      <title>laravel规范API返回的JSON格式</title>
+      <link>http://myxy99.cn/posts/laravel%E8%A7%84%E8%8C%83api%E8%BF%94%E5%9B%9E%E7%9A%84json%E6%A0%BC%E5%BC%8F/</link>
+      <pubDate>Fri, 10 Apr 2020 22:01:59 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/laravel%E8%A7%84%E8%8C%83api%E8%BF%94%E5%9B%9E%E7%9A%84json%E6%A0%BC%E5%BC%8F/</guid>
+      <description>laravel 规范API返回的JSON格式 在最近开发项目的时候使用Laravel框架，对api进行返回数据的时候，在团队开发的时候太随意了，缺少一个统一的结构来包装返回值，所以就需要进行返回格式的统一
+这里我就介绍两个方法：
+ServiceProvider方法 创建一个ServiceProvider 命令行输入：
+php artisan make:provider ResponseServiceProvider 在boot绑定response响应宏 这一步主要就是给自带的response方法添加一些自己的方法：</description>
+    </item>
+    
+  </channel>
+</rss>

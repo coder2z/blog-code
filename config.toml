@@ -1,0 +1,110 @@
+baseURL = "http://myxy99.cn/"
+languageCode = "en"
+DefaultContentLanguage = "en"
+title = "Coder2z Blog"
+theme = "anatole"
+summarylength = 10
+enableEmoji = true
+enableRobotsTXT = true
+
+# Enable Disqus
+#disqusShortname = ""
+
+# Google Analytics
+#googleAnalytics = "UA-123-45"
+
+# Syntax highlighting
+pygmentsUseClasses = true
+pygmentsCodeFences = false
+pygmentsCodefencesGuessSyntax = false
+
+[params]
+title = "I'm Coder2z"
+author = "Coder2z"
+copyright = "2019-2021"
+description = "Hi I'm Coder2z, nice to meet you"
+displayMode = "dark"
+disableThemeSwitcher = false
+profilePicture = "images/profile.png"
+keywords = ""
+favicon = "favicons/"
+# example ["css/custom.css"]
+customCss = []
+# example ["js/custom.js"]
+customJs = [] 
+mainSections = ["post"]
+fullPostContent = false
+images = ["images/site-feature-image.png"]
+doNotLoadAnimations = true
+# Form Spree Contact Form
+#contactFormAction = "https://formspree.io/f/your-form-hash-here"
+# Google Site Verify
+#googleSiteVerify = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+# indexDateFormat = "Mon, Jan 2, 2006"
+# listDateFormat = "Jan 2"
+# singleDateFormat = "Mon, Jan 2, 2006"
+# Commento Comments
+# CommentoURL = "https://commento.example.com/js/commento.js"
+
+[params.simpleAnalytics]
+# enable = true
+# customurl = "https://analytics.example.com"
+
+## Math settings
+[params.math]
+enable = false  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
+use = "katex"  # options: "katex", "mathjax". default is "katex".
+
+## Social links
+# use 'fab' when brand icons, use 'fas' when standard solid icons.
+
+[[params.socialIcons]]
+icon = "fab fa-github"
+title = "GitHub"
+url = "https://github.com/Coder2z"
+
+
+[[params.socialIcons]]
+icon = "fas fa-envelope"
+title = "e-mail"
+url = "mailto:Coder2z@qq.com"
+
+## Menu items
+
+[menu]
+
+  [[menu.main]]
+  name = "Home"
+  identifier = "home"
+  weight = 100
+  url = "/"
+
+  [[menu.main]]
+  name = "Posts"
+  weight = 200
+  identifier = "posts"
+  url = "/post/"
+
+  [[menu.main]]
+  name = "About"
+  weight = 600
+  identifier = "about"
+  url = "/about/"
+
+  [[menu.main]]
+  name = "categories"
+  weight = 400
+  identifier = "categories"
+  url = "/categories/"
+
+  [[menu.main]]
+  name = "tags"
+  weight = 500
+  identifier = "tags"
+  url = "/tags/"
+
+    [[menu.main]]
+  name = "links"
+  weight = 700
+  identifier = "links"
+  url = "/links/"

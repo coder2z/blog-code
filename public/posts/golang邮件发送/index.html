@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | Golang邮件发送 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/golang%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Golang邮件发送"/>
+<meta name="twitter:description" content="golang发送邮件 安装库 go get github.com/jordan-wright/email 简单代码实现 package main import ( &#34;log&#34; &#34;net/smtp&#34; &#34;github."/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>Golang邮件发送</h3>
+                
+            </div>
+
+            <h1 id="golang发送邮件">golang发送邮件</h1>
+<h2 id="安装库">安装库</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="k">go</span> <span class="nx">get</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">jordan</span><span class="o">-</span><span class="nx">wright</span><span class="o">/</span><span class="nx">email</span>
+
+</code></pre></div><h2 id="简单代码实现">简单代码实现</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;net/smtp&#34;</span>
+    <span class="s">&#34;github.com/jordan-wright/email&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">e</span> <span class="o">:=</span> <span class="nx">email</span><span class="p">.</span><span class="nf">NewEmail</span><span class="p">()</span>
+    <span class="c1">//设置发送方的邮箱
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">From</span> <span class="p">=</span> <span class="s">&#34;112233 &lt;XXX@qq.com&gt;&#34;</span>
+    <span class="c1">// 设置接收方的邮箱
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">To</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;XXX@qq.com&#34;</span><span class="p">}</span>
+    <span class="c1">//设置主题
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">Subject</span> <span class="p">=</span> <span class="s">&#34;这是主题&#34;</span>
+    <span class="c1">//设置文件发送的内容
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">Text</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;发送的内容&#34;</span><span class="p">)</span>
+    <span class="c1">//设置服务器相关的配置
+</span><span class="c1"></span>    <span class="nx">err</span> <span class="o">:=</span> <span class="nx">e</span><span class="p">.</span><span class="nf">Send</span><span class="p">(</span><span class="s">&#34;smtp.qq.com:25&#34;</span><span class="p">,</span> <span class="nx">smtp</span><span class="p">.</span><span class="nf">PlainAuth</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;你的邮箱账号&#34;</span><span class="p">,</span> <span class="s">&#34;这块是你的授权码&#34;</span><span class="p">,</span> <span class="s">&#34;smtp.qq.com&#34;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+       <span class="o">...</span><span class="p">.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="实现抄送功能">实现抄送功能</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="c1">//设置抄送如果抄送多人逗号隔开
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">Cc</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;XXX@qq.com&#34;</span><span class="p">,</span><span class="nx">XXX</span><span class="err">@</span><span class="nx">qq</span><span class="p">.</span><span class="nx">com</span><span class="p">}</span>
+    <span class="c1">//设置秘密抄送
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">Bcc</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;XXX@qq.com&#34;</span><span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="发送html代码的邮件">发送html代码的邮件</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">HTML</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">`
+</span><span class="s">    &lt;h1&gt;&lt;a href=&#34;http://www.baidu.com/&#34;&gt;百度&lt;/a&gt;&lt;/h1&gt;    
+</span><span class="s">    `</span><span class="p">)</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="实现邮件附件的发送">实现邮件附件的发送</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nf">AttachFile</span><span class="p">(</span><span class="s">&#34;./test.txt&#34;</span><span class="p">)</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="连接池">连接池</h2>
+<p>每次调用Send时都会和 SMTP 服务器建立一次连接，如果发送邮件很多很频繁的话可能会有性能问题。email提供了连接池，可以复用网络连接：</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;net/smtp&#34;</span>
+    <span class="s">&#34;os&#34;</span>
+    <span class="s">&#34;sync&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+    <span class="s">&#34;github.com/jordan-wright/email&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="o">*</span><span class="nx">email</span><span class="p">.</span><span class="nx">Email</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="nx">p</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">email</span><span class="p">.</span><span class="nf">NewPool</span><span class="p">(</span>
+        <span class="s">&#34;smtp.qq.com:25&#34;</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">,</span>
+        <span class="nx">smtp</span><span class="p">.</span><span class="nf">PlainAuth</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;XXX@qq.com&#34;</span><span class="p">,</span> <span class="s">&#34;你的授权码&#34;</span><span class="p">,</span> <span class="s">&#34;smtp.qq.com&#34;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;failed to create pool:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+    <span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+            <span class="k">for</span> <span class="nx">e</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">ch</span> <span class="p">{</span>
+                <span class="nx">err</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">Send</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;email:%v sent error:%v\n&#34;</span><span class="p">,</span> <span class="nx">e</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}()</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="nx">e</span> <span class="o">:=</span> <span class="nx">email</span><span class="p">.</span><span class="nf">NewEmail</span><span class="p">()</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">From</span> <span class="p">=</span> <span class="s">&#34;dj &lt;XXX@qq.com&gt;&#34;</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">To</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;XXX@qq.com&#34;</span><span class="p">}</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">Subject</span> <span class="p">=</span> <span class="s">&#34;Awesome web&#34;</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">Text</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;Awesome Web %d&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="nx">e</span>
+    <span class="p">}</span>
+    <span class="nb">close</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+    <span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><p>上面程序中，我们创建 4 goroutine 共用一个连接池发送邮件，发送 10 封邮件后程序退出。为了等邮件都发送完成或失败，程序才退出，我们使用了sync.WaitGroup。由于使用了 goroutine，邮件顺序不能保证。</p>
+<p>参考连接：<a href="https://github.com/darjun/go-daily-lib">https://github.com/darjun/go-daily-lib</a></p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/golang/">golang</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/golang/">golang</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

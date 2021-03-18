@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | Golang实现RabbitMQ五种模式 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0rabbitmq%E4%BA%94%E7%A7%8D%E6%A8%A1%E5%BC%8F/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Golang实现RabbitMQ五种模式"/>
+<meta name="twitter:description" content="使用的依赖包 github.com/streadway/amqp 创建RabbitMQ实例 package RabbitMQ import ( &#34;fmt&#34; &#34;github.com/streadway/amqp&#34; &#34;log&#34; ) // 用户名 密码 ip:端口/虚拟机 const MQURL = &#34;amqp://admin:123456@127."/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>Golang实现RabbitMQ五种模式</h3>
+                
+            </div>
+
+            <h1 id="使用的依赖包">使用的依赖包</h1>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">streadway</span><span class="o">/</span><span class="nx">amqp</span>
+
+</code></pre></div><h1 id="创建rabbitmq实例">创建RabbitMQ实例</h1>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">RabbitMQ</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;github.com/streadway/amqp&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// 用户名 密码 ip:端口/虚拟机
+</span><span class="c1"></span><span class="kd">const</span> <span class="nx">MQURL</span> <span class="p">=</span> <span class="s">&#34;amqp://admin:123456@127.0.0.1:5672/test&#34;</span>
+
+<span class="kd">type</span> <span class="nx">RabbitMQ</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">conn</span>    <span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Connection</span>
+	<span class="nx">channel</span> <span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Channel</span>
+	<span class="c1">//队列名称
+</span><span class="c1"></span>	<span class="nx">QueueName</span> <span class="kt">string</span>
+	<span class="c1">//交换机
+</span><span class="c1"></span>	<span class="nx">Exchange</span> <span class="kt">string</span>
+	<span class="c1">//key
+</span><span class="c1"></span>	<span class="nx">key</span> <span class="kt">string</span>
+	<span class="c1">//连接信息
+</span><span class="c1"></span>	<span class="nx">MqUrl</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="c1">//创建RabbitMQ结构体实例
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewRabbitMQ</span><span class="p">(</span><span class="nx">queueName</span><span class="p">,</span> <span class="nx">exchange</span><span class="p">,</span> <span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">RabbitMQ</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">RabbitMQ</span><span class="p">{</span><span class="nx">QueueName</span><span class="p">:</span> <span class="nx">queueName</span><span class="p">,</span> <span class="nx">Exchange</span><span class="p">:</span> <span class="nx">exchange</span><span class="p">,</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">MqUrl</span><span class="p">:</span> <span class="nx">MQURL</span><span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+	<span class="c1">//创建RabbitMQ连接
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">amqp</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">MqUrl</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;创建连接错误!&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">.</span><span class="nf">Channel</span><span class="p">()</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;获取channel失败!&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">rabbitmq</span>
+<span class="p">}</span>
+
+<span class="c1">//断开channel和connection
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">Destroy</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">//错误处理函数
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">,</span> <span class="nx">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;%s:%s&#34;</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s,%s&#34;</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id="simple模式">Simple模式</h1>
+<p>Simple模式工作流程：</p>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/20200708092914.png" alt="Simple模式"></p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//创建简单模式下RabbitMQ实例
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewRabbitMQSimple</span><span class="p">(</span><span class="nx">queueName</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">RabbitMQ</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nf">NewRabbitMQ</span><span class="p">(</span><span class="nx">queueName</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//简单模式下生产代码
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">PublishSimple</span><span class="p">(</span><span class="nx">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">//1.申请队列,如果队列不存在会自动创建,如果存在则跳过创建
+</span><span class="c1"></span>	<span class="c1">//保证队列存在,消息队列能发送到队列中
+</span><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">QueueName</span><span class="p">,</span>
+		<span class="c1">//是否持久化
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//是否为自动删除
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//是否具有排他性
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//是否阻塞
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//额外属性
+</span><span class="c1"></span>		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;QueueDeclare:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="c1">//2.发送消息到队列中
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">QueueName</span><span class="p">,</span>
+		<span class="c1">//如果为true,根据exchange类型和routekey规则,如果无法找到符合条件的队列那么会把发送的消息返回给发送者
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//如果为true,当exchange发送消息队列到队列后发现队列上没有绑定消费者,则会把消息发还给发送者
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="nx">amqp</span><span class="p">.</span><span class="nx">Publishing</span><span class="p">{</span>
+			<span class="nx">ContentType</span><span class="p">:</span> <span class="s">&#34;text/plain&#34;</span><span class="p">,</span>
+			<span class="nx">Body</span><span class="p">:</span>        <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">message</span><span class="p">),</span>
+		<span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Publish:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//简单模式下消费代码
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">ConsumeSimple</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">//1.申请队列,如果队列不存在会自动创建,如果存在则跳过创建
+</span><span class="c1"></span>	<span class="c1">//保证队列存在,消息队列能发送到队列中
+</span><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">QueueName</span><span class="p">,</span>
+		<span class="c1">//是否持久化
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//是否为自动删除
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//是否具有排他性
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//是否阻塞
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//额外属性
+</span><span class="c1"></span>		<span class="kc">nil</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;QueueDeclare:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="c1">//2.接受消息
+</span><span class="c1"></span>	<span class="nx">msgs</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Consume</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">QueueName</span><span class="p">,</span>
+		<span class="c1">//用来区分多个消费者
+</span><span class="c1"></span>		<span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="c1">//是否自动应答
+</span><span class="c1"></span>		<span class="kc">true</span><span class="p">,</span>
+		<span class="c1">//是否具有排他性
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//如果设置为true,表示不能将同一个connection中发送消息传递给这个connection中的消费者
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//队列消费是否阻塞
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Consume:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">forever</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">)</span>
+	<span class="c1">//3.启用协程处理消息
+</span><span class="c1"></span>	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">d</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">msgs</span> <span class="p">{</span>
+			<span class="c1">//实现我们要处理的逻辑函数
+</span><span class="c1"></span>			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Received a message:%s&#34;</span><span class="p">,</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}()</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[*] Waiting for messages,To exit press CTRL+C\n&#34;</span><span class="p">)</span>
+	<span class="o">&lt;-</span><span class="nx">forever</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="简单模式publish">简单模式publish</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;go-rabbitmq/RabbitMQ&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQSimple</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">PublishSimple</span><span class="p">(</span><span class="s">&#34;myxy99.cn msg&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;发送成功!&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="简单模式recevie">简单模式recevie</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQSimple</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">ConsumeSimple</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id="work模式">Work模式</h1>
+<p>Work模式工作流程：</p>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/20200708093050.png" alt="Work模式"></p>
+<p>simple模式和work模式其实用的是一套逻辑代码，只是work模式是可以有多个消费者的，work模式起到一个负载均衡的作用。</p>
+<h2 id="work模式publish">work模式publish</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+	<span class="s">&#34;strconv&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQSimple</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)</span>
+
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">PublishSimple</span><span class="p">(</span><span class="s">&#34;Hello test!&#34;</span> <span class="o">+</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="work模式receive1">work模式receive1</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQSimple</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">ConsumeSimple</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="work模式receive2">work模式receive2</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQSimple</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">ConsumeSimple</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id="订阅模式">订阅模式</h1>
+<p>订阅模式工作流程：</p>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/20200708095831.png" alt=""></p>
+<p>订阅模式的特别是：一个消息被投递到多个队列，一个消息能被多个消费者获取。过程是由生产者将消息发送到exchange(交换机）里，然后exchange通过一系列的规则发送到队列上，然后由绑定对应的消费者进行消息。</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//订阅模式创建RabbitMQ实例
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewRabbitMQPubSub</span><span class="p">(</span><span class="nx">exchangeName</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">RabbitMQ</span> <span class="p">{</span>
+	<span class="c1">//创建RabbitMQ实例
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nf">NewRabbitMQ</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="nx">exchangeName</span><span class="p">,</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+	<span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+	<span class="c1">//获取connection
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">amqp</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">Mqurl</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="s">&#34;failed to connect rabbitmq!&#34;</span><span class="p">)</span>
+	<span class="c1">//获取channel
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">.</span><span class="nf">Channel</span><span class="p">()</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;failed to open a channel&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">rabbitmq</span>
+<span class="p">}</span>
+
+<span class="c1">//订阅模式生产
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">PublishPub</span><span class="p">(</span><span class="nx">message</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">//1.尝试创建交换机
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="s">&#34;fanout&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//true表示这个exchange不可以被client用来推送消息，仅用来进行exchange和exchange之间的绑定
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare an excha&#34;</span><span class="o">+</span>
+		<span class="s">&#34;nge&#34;</span><span class="p">)</span>
+
+	<span class="c1">//2.发送消息
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="nx">amqp</span><span class="p">.</span><span class="nx">Publishing</span><span class="p">{</span>
+			<span class="nx">ContentType</span><span class="p">:</span> <span class="s">&#34;text/plain&#34;</span><span class="p">,</span>
+			<span class="nx">Body</span><span class="p">:</span>        <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">message</span><span class="p">),</span>
+		<span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">//订阅模式消费端代码
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">RecieveSub</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">//1.试探性创建交换机
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//交换机类型
+</span><span class="c1"></span>		<span class="s">&#34;fanout&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="c1">//YES表示这个exchange不可以被client用来推送消息，仅用来进行exchange和exchange之间的绑定
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare an exch&#34;</span><span class="o">+</span>
+		<span class="s">&#34;ange&#34;</span><span class="p">)</span>
+    <span class="c1">//2.试探性创建队列，这里注意队列名称不要写
+</span><span class="c1"></span>	<span class="nx">q</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span> <span class="c1">//随机生产队列名称
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare a queue&#34;</span><span class="p">)</span>
+
+	<span class="c1">//绑定队列到 exchange 中
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span>
+		<span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+		<span class="c1">//在pub/sub模式下，这里的key要为空
+</span><span class="c1"></span>		<span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">)</span>
+
+	<span class="c1">//消费消息
+</span><span class="c1"></span>	<span class="nx">messges</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Consume</span><span class="p">(</span>
+		<span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+
+	<span class="nx">forever</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">)</span>
+
+	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">d</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">messges</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Received a message: %s&#34;</span><span class="p">,</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;退出请按 CTRL+C\n&#34;</span><span class="p">)</span>
+	<span class="o">&lt;-</span><span class="nx">forever</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="订阅模式publish">订阅模式publish</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+	<span class="s">&#34;strconv&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQPubSub</span><span class="p">(</span><span class="s">&#34;newProduct&#34;</span><span class="p">)</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">PublishPub</span><span class="p">(</span><span class="s">&#34;订阅模式生产第&#34;</span> <span class="o">+</span>
+			<span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;条&#34;</span> <span class="o">+</span> <span class="s">&#34;数据&#34;</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;订阅模式生产第&#34;</span> <span class="o">+</span>
+			<span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;条&#34;</span> <span class="o">+</span> <span class="s">&#34;数据&#34;</span><span class="p">)</span>
+		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+	<span class="p">}</span>
+
+<span class="p">}</span>
+
+</code></pre></div><h2 id="订阅模式receive1">订阅模式receive1</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQPubSub</span><span class="p">(</span><span class="s">&#34;newProduct&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">RecieveSub</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="订阅模式receive2">订阅模式receive2</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQPubSub</span><span class="p">(</span><span class="s">&#34;newProduct&#34;</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">RecieveSub</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id="路由模式">路由模式</h1>
+<p>路由模式工作流程：</p>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/20200708100024.png" alt=""></p>
+<p>路由模式:一个消息由多个消费者消费的基础上指定由哪些消息者来消费。</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">NewRabbitMQRouting</span><span class="p">(</span><span class="nx">exchangeName</span> <span class="kt">string</span><span class="p">,</span><span class="nx">routingKey</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">RabbitMQ</span> <span class="p">{</span>
+	<span class="c1">//创建RabbitMQ实例
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nf">NewRabbitMQ</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="nx">exchangeName</span><span class="p">,</span><span class="nx">routingKey</span><span class="p">)</span>
+	<span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+	<span class="c1">//获取connection
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">amqp</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">Mqurl</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="s">&#34;failed to connect rabbitmq!&#34;</span><span class="p">)</span>
+	<span class="c1">//获取channel
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">.</span><span class="nf">Channel</span><span class="p">()</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;failed to open a channel&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">rabbitmq</span>
+<span class="p">}</span>
+
+<span class="c1">//路由模式发送消息
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">PublishRouting</span><span class="p">(</span><span class="nx">message</span> <span class="kt">string</span> <span class="p">)</span>  <span class="p">{</span>
+	<span class="c1">//1.尝试创建交换机
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//要改成direct
+</span><span class="c1"></span>		<span class="s">&#34;direct&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare an exchange&#34;</span><span class="p">)</span>
+
+	<span class="c1">//2.发送消息
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//要设置
+</span><span class="c1"></span>		<span class="nx">r</span><span class="p">.</span><span class="nx">Key</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="nx">amqp</span><span class="p">.</span><span class="nx">Publishing</span><span class="p">{</span>
+			<span class="nx">ContentType</span><span class="p">:</span> <span class="s">&#34;text/plain&#34;</span><span class="p">,</span>
+			<span class="nx">Body</span><span class="p">:</span>        <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">message</span><span class="p">),</span>
+		<span class="p">})</span>
+<span class="p">}</span>
+<span class="c1">//路由模式接受消息
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">RecieveRouting</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">//1.试探性创建交换机
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//交换机类型
+</span><span class="c1"></span>		<span class="s">&#34;direct&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare an exch&#34;</span><span class="o">+</span>
+		<span class="s">&#34;ange&#34;</span><span class="p">)</span>
+	<span class="c1">//2.试探性创建队列，这里注意队列名称不要写
+</span><span class="c1"></span>	<span class="nx">q</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span> <span class="c1">//随机生产队列名称
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare a queue&#34;</span><span class="p">)</span>
+
+	<span class="c1">//绑定队列到 exchange 中
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span>
+		<span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+		<span class="c1">//需要绑定key
+</span><span class="c1"></span>		<span class="nx">r</span><span class="p">.</span><span class="nx">Key</span><span class="p">,</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">)</span>
+
+	<span class="c1">//消费消息
+</span><span class="c1"></span>	<span class="nx">messges</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Consume</span><span class="p">(</span>
+		<span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+
+	<span class="nx">forever</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">)</span>
+
+	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">d</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">messges</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Received a message: %s&#34;</span><span class="p">,</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;退出请按 CTRL+C\n&#34;</span><span class="p">)</span>
+	<span class="o">&lt;-</span><span class="nx">forever</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="路由模式publish">路由模式publish</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+	<span class="s">&#34;strconv&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">mqOne</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQRouting</span><span class="p">(</span><span class="s">&#34;myxy99&#34;</span><span class="p">,</span><span class="s">&#34;myxy99_one&#34;</span><span class="p">)</span>
+	<span class="nx">mqTwo</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQRouting</span><span class="p">(</span><span class="s">&#34;myxy99&#34;</span><span class="p">,</span><span class="s">&#34;myxy99_two&#34;</span><span class="p">)</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">mqOne</span><span class="p">.</span><span class="nf">PublishRouting</span><span class="p">(</span><span class="s">&#34;Hello myxy99 one!&#34;</span> <span class="o">+</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+		<span class="nx">mqTwo</span><span class="p">.</span><span class="nf">PublishRouting</span><span class="p">(</span><span class="s">&#34;Hello myxy99 Two!&#34;</span> <span class="o">+</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="路由模式receive-one">路由模式receive-one</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">mq</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQRouting</span><span class="p">(</span><span class="s">&#34;myxy99&#34;</span><span class="p">,</span><span class="s">&#34;myxy99_one&#34;</span><span class="p">)</span>
+	<span class="nx">mq</span><span class="p">.</span><span class="nf">RecieveRouting</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="路由模式receive-two">路由模式receive-two</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">mq</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQRouting</span><span class="p">(</span><span class="s">&#34;myxy99&#34;</span><span class="p">,</span><span class="s">&#34;myxy99_two&#34;</span><span class="p">)</span>
+	<span class="nx">mq</span><span class="p">.</span><span class="nf">RecieveRouting</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h1 id="话题模式">话题模式</h1>
+<p>话题模式工作流程：</p>
+<p><img src="https://gitee.com/coder2m/pic/raw/master/img/20200708100143.png" alt=""></p>
+<p>话题模式：话题模式是在路由模式上演化而来。不同的是我们以通配符的方式来指定我们的消费者。</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//话题模式
+</span><span class="c1">//创建RabbitMQ实例
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewRabbitMQTopic</span><span class="p">(</span><span class="nx">exchangeName</span> <span class="kt">string</span><span class="p">,</span><span class="nx">routingKey</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">RabbitMQ</span> <span class="p">{</span>
+	<span class="c1">//创建RabbitMQ实例
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span> <span class="o">:=</span> <span class="nf">NewRabbitMQ</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="nx">exchangeName</span><span class="p">,</span><span class="nx">routingKey</span><span class="p">)</span>
+	<span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+	<span class="c1">//获取connection
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">amqp</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">Mqurl</span><span class="p">)</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="s">&#34;failed to connect rabbitmq!&#34;</span><span class="p">)</span>
+	<span class="c1">//获取channel
+</span><span class="c1"></span>	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rabbitmq</span><span class="p">.</span><span class="nx">conn</span><span class="p">.</span><span class="nf">Channel</span><span class="p">()</span>
+	<span class="nx">rabbitmq</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;failed to open a channel&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">rabbitmq</span>
+<span class="p">}</span>
+<span class="c1">//话题模式发送消息
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">PublishTopic</span><span class="p">(</span><span class="nx">message</span> <span class="kt">string</span> <span class="p">)</span>  <span class="p">{</span>
+	<span class="c1">//1.尝试创建交换机
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//要改成topic
+</span><span class="c1"></span>		<span class="s">&#34;topic&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare an excha&#34;</span><span class="o">+</span>
+		<span class="s">&#34;nge&#34;</span><span class="p">)</span>
+
+	<span class="c1">//2.发送消息
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//要设置
+</span><span class="c1"></span>		<span class="nx">r</span><span class="p">.</span><span class="nx">Key</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="nx">amqp</span><span class="p">.</span><span class="nx">Publishing</span><span class="p">{</span>
+			<span class="nx">ContentType</span><span class="p">:</span> <span class="s">&#34;text/plain&#34;</span><span class="p">,</span>
+			<span class="nx">Body</span><span class="p">:</span>        <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">message</span><span class="p">),</span>
+		<span class="p">})</span>
+<span class="p">}</span>
+<span class="c1">//话题模式接受消息
+</span><span class="c1">//要注意key,规则
+</span><span class="c1">//其中“*”用于匹配一个单词，“#”用于匹配多个单词（可以是零个）
+</span><span class="c1">//匹配 myxy99.* 表示匹配 myxy99.hello, 但是myxy99.hello.one需要用myxy99.#才能匹配到
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">RabbitMQ</span><span class="p">)</span> <span class="nf">RecieveTopic</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">//1.试探性创建交换机
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="c1">//交换机类型
+</span><span class="c1"></span>		<span class="s">&#34;topic&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare an exch&#34;</span><span class="o">+</span>
+		<span class="s">&#34;ange&#34;</span><span class="p">)</span>
+	<span class="c1">//2.试探性创建队列，这里注意队列名称不要写
+</span><span class="c1"></span>	<span class="nx">q</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span> <span class="c1">//随机生产队列名称
+</span><span class="c1"></span>		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">failOnErr</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to declare a queue&#34;</span><span class="p">)</span>
+
+	<span class="c1">//绑定队列到 exchange 中
+</span><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span>
+		<span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+		<span class="c1">//在pub/sub模式下，这里的key要为空
+</span><span class="c1"></span>		<span class="nx">r</span><span class="p">.</span><span class="nx">Key</span><span class="p">,</span>
+		<span class="nx">r</span><span class="p">.</span><span class="nx">Exchange</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">)</span>
+
+	<span class="c1">//消费消息
+</span><span class="c1"></span>	<span class="nx">messges</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">channel</span><span class="p">.</span><span class="nf">Consume</span><span class="p">(</span>
+		<span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+		<span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="kc">true</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">false</span><span class="p">,</span>
+		<span class="kc">nil</span><span class="p">,</span>
+	<span class="p">)</span>
+
+	<span class="nx">forever</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">)</span>
+
+	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">d</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">messges</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Received a message: %s&#34;</span><span class="p">,</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;退出请按 CTRL+C\n&#34;</span><span class="p">)</span>
+	<span class="o">&lt;-</span><span class="nx">forever</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="话题模式publish">话题模式publish</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+	<span class="s">&#34;strconv&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">mqOne</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQTopic</span><span class="p">(</span><span class="s">&#34;myxy99Topic&#34;</span><span class="p">,</span><span class="s">&#34;myxy99.topic.one&#34;</span><span class="p">)</span>
+	<span class="nx">mqTwo</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQTopic</span><span class="p">(</span><span class="s">&#34;myxy99Topic&#34;</span><span class="p">,</span><span class="s">&#34;myxy99.topic.two&#34;</span><span class="p">)</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">mqOne</span><span class="p">.</span><span class="nf">PublishTopic</span><span class="p">(</span><span class="s">&#34;Hello myxy99 topic one!&#34;</span> <span class="o">+</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+		<span class="nx">mqTwo</span><span class="p">.</span><span class="nf">PublishTopic</span><span class="p">(</span><span class="s">&#34;Hello myxy99 topic Two!&#34;</span> <span class="o">+</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+	
+<span class="p">}</span>
+
+</code></pre></div><h2 id="话题模式receive-all">话题模式receive-all</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">mq</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQTopic</span><span class="p">(</span><span class="s">&#34;myxy99Topic&#34;</span><span class="p">,</span><span class="s">&#34;#&#34;</span><span class="p">)</span>
+	<span class="nx">mq</span><span class="p">.</span><span class="nf">RecieveTopic</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="话题模式receive-two">话题模式receive-two</h2>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;rabbitmq/RabbitMQ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">mq</span><span class="o">:=</span><span class="nx">RabbitMQ</span><span class="p">.</span><span class="nf">NewRabbitMQTopic</span><span class="p">(</span><span class="s">&#34;myxy99Topic&#34;</span><span class="p">,</span><span class="s">&#34;myxy99.*.two&#34;</span><span class="p">)</span>
+	<span class="nx">mq</span><span class="p">.</span><span class="nf">RecieveTopic</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div><p>GitHub地址：<a href="https://github.com/coder2m/Go-RabbitMQ">https://github.com/coder2m/Go-RabbitMQ</a></p>
+</div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/golang/">golang</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/golang/">golang</a><a class="tag" href="/tags/rabbitmq/">RabbitMQ</a><a class="tag" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

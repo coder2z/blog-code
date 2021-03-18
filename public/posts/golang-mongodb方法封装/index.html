@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <title> Coder2z | Golang-MongoDb方法封装 </title>
+
+    
+    <meta charset="utf-8"><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="Hi I&#39;m Coder2z, nice to meet you">
+    
+    <link rel="stylesheet"
+          href="http://myxy99.cn/css/style.min.d98386e9809c4644e290afb256e8aad6d2ae6b1aefe82c504efd652e6642708d.css"
+          integrity="sha256-2YOG6YCcRkTikK&#43;yVuiq1tKuaxrv6CxQTv1lLmZCcI0="
+          crossorigin="anonymous"
+          type="text/css">
+    
+    <link rel="stylesheet"
+        href="http://myxy99.cn/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css"
+        integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS&#43;yuWSR4="
+        crossorigin="anonymous"
+        type="text/css">
+    
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" 
+    crossorigin="anonymous" />
+
+    
+    <link rel="shortcut icon" href="http://myxy99.cn/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://myxy99.cn/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://myxy99.cn/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://myxy99.cn/favicons/favicon-16x16.png">
+
+    <link rel="canonical" href="http://myxy99.cn/posts/golang-mongodb%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85/">
+
+    
+    
+    
+    
+    <script type="text/javascript"
+            src="http://myxy99.cn/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js"
+            integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ="
+            crossorigin="anonymous"></script>
+
+
+    
+        
+        
+        <script type="text/javascript"
+                src="http://myxy99.cn/js/anatole-theme-switcher.min.8ef71e0fd43f21a303733dbbecae5438b791d2b826c68a9883bd7aa459a076d2.js"
+                integrity="sha256-jvceD9Q/IaMDcz277K5UOLeR0rgmxoqYg716pFmgdtI="
+                crossorigin="anonymous"></script>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://myxy99.cn/images/site-feature-image.png"/>
+
+<meta name="twitter:title" content="Golang-MongoDb方法封装"/>
+<meta name="twitter:description" content="Golang操作MongoDb 安装依赖 go get -u github.com/globalsign/mgo MongoDb的方法封装 /** * @Author: myxy99 &lt;myxy99@foxmail."/>
+
+
+    
+
+</head>
+<body><div class="sidebar animated fadeInDown ">
+    <div class="logo-title">
+        <div class="title">
+            <img src="http://myxy99.cn/images/profile.png" alt="profile picture">
+            <h3 title=""><a href="/">I&#39;m Coder2z</a></h3>
+            <div class="description">
+                <p>Hi I&#39;m Coder2z, nice to meet you</p>
+            </div>
+        </div>
+    </div>
+    <ul class="social-links">
+        
+            <li>
+                <a href="https://de.linkedin.com/" rel="me" aria-label="Linkedin">
+                    <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://github.com/lxndrblz/anatole/" rel="me" aria-label="GitHub">
+                    <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://www.instagram.com/" rel="me" aria-label="instagram">
+                    <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="mailto:mail@example.com" rel="me" aria-label="e-mail">
+                    <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+    <div class="footer">
+        <div class="by_farbox">&copy; Coder2z  2019-2021 </div>
+    </div>
+</div>
+<div class="main">
+    <div class="page-top  animated fadeInDown ">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="nav" id="navMenu">
+        
+        
+            
+            <li><a 
+                   href="/"
+                        
+                   title="">Home</a></li>
+        
+            
+            <li><a 
+                   href="/posts/"
+                        
+                   title="">Posts</a></li>
+        
+            
+            <li><a 
+                   href="/about/"
+                        
+                   title="">About</a></li>
+        
+            
+            <li><a 
+                   href="/categories/"
+                        
+                   title="">categories</a></li>
+        
+        
+        
+            <li class="theme-switch-item">
+                <a class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="autopagerize_page_element">
+        <div class="content">
+    <div class="post  animated fadeInDown ">
+        <div class="post-content">
+            
+            <div class="post-title">
+                <h3>Golang-MongoDb方法封装</h3>
+                
+            </div>
+
+            <h1 id="golang操作mongodb">Golang操作MongoDb</h1>
+<h2 id="安装依赖">安装依赖</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="nx">get</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">globalsign</span><span class="o">/</span><span class="nx">mgo</span>
+</code></pre></div><h2 id="mongodb的方法封装">MongoDb的方法封装</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="cm">/**
+</span><span class="cm">* @Author: myxy99 &lt;myxy99@foxmail.com&gt;
+</span><span class="cm">* @Date: 2020/7/30 14:16
+</span><span class="cm"> */</span>
+<span class="kn">package</span> <span class="nx">mongoDb</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;github.com/globalsign/mgo&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">ClientImp</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Session</span><span class="p">,</span> <span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">)</span>
+	<span class="nf">Insert</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">docs</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
+	<span class="nf">FindOne</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">result</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
+	<span class="nf">FindAll</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">result</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
+	<span class="nf">Update</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">update</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
+	<span class="nf">Remove</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Client</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">cfg</span> <span class="nx">CallerCfg</span>
+	<span class="nx">m</span>   <span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Session</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">cLogger</span> <span class="kd">struct</span><span class="p">{}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">cLogger</span><span class="p">)</span> <span class="nf">Output</span><span class="p">(</span><span class="nx">calldepth</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;calldepth: &#34;</span><span class="p">,</span> <span class="nx">calldepth</span><span class="p">,</span> <span class="s">&#34;, s: &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Session</span><span class="p">,</span> <span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">s</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">m</span><span class="p">.</span><span class="nf">Copy</span><span class="p">()</span>
+	<span class="k">return</span> <span class="nx">s</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">DB</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nf">C</span><span class="p">(</span><span class="nx">collection</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">Insert</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">docs</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">ms</span><span class="p">,</span> <span class="nx">mc</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nx">ms</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="k">return</span> <span class="nx">mc</span><span class="p">.</span><span class="nf">Insert</span><span class="p">(</span><span class="nx">docs</span><span class="o">...</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">FindOne</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">result</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">ms</span><span class="p">,</span> <span class="nx">mc</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nx">ms</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="k">return</span> <span class="nx">mc</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="nx">query</span><span class="p">).</span><span class="nf">Select</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nf">One</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">FindAll</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">result</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">ms</span><span class="p">,</span> <span class="nx">mc</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nx">ms</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="k">return</span> <span class="nx">mc</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="nx">query</span><span class="p">).</span><span class="nf">Select</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nf">All</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">update</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">ms</span><span class="p">,</span> <span class="nx">mc</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nx">ms</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="k">return</span> <span class="nx">mc</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">update</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">Remove</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">query</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">ms</span><span class="p">,</span> <span class="nx">mc</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nx">ms</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="k">return</span> <span class="nx">mc</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">Run</span><span class="p">(</span><span class="nx">cfg</span> <span class="nx">CallerCfg</span><span class="p">)</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="p">(</span>
+		<span class="nx">m</span>        <span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Session</span>
+		<span class="nx">dialInfo</span> <span class="o">*</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">DialInfo</span>
+	<span class="p">)</span>
+	<span class="nx">dialInfo</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">DialInfo</span><span class="p">{</span>
+		<span class="nx">Addrs</span><span class="p">:</span>    <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">URL</span><span class="p">},</span>
+		<span class="nx">Source</span><span class="p">:</span>   <span class="nx">cfg</span><span class="p">.</span><span class="nx">Source</span><span class="p">,</span>
+		<span class="nx">Username</span><span class="p">:</span> <span class="nx">cfg</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span>
+		<span class="nx">Password</span><span class="p">:</span> <span class="nx">cfg</span><span class="p">.</span><span class="nx">Password</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">m</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">mgo</span><span class="p">.</span><span class="nf">DialWithInfo</span><span class="p">(</span><span class="nx">dialInfo</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">(</span><span class="s">&#34;create session error &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">mgo</span><span class="p">.</span><span class="nf">SetLogger</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">cLogger</span><span class="p">{})</span>
+	<span class="nx">mgo</span><span class="p">.</span><span class="nf">SetDebug</span><span class="p">(</span><span class="nx">cfg</span><span class="p">.</span><span class="nx">Debug</span><span class="p">)</span>
+	<span class="c1">// Optional. Switch the session to a monotonic behavior.
+</span><span class="c1"></span>	<span class="nx">m</span><span class="p">.</span><span class="nf">SetMode</span><span class="p">(</span><span class="nx">mgo</span><span class="p">.</span><span class="nx">Monotonic</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Client</span><span class="p">{</span><span class="nx">cfg</span><span class="p">,</span> <span class="nx">m</span><span class="p">},</span> <span class="nx">err</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id="使用">使用</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="cm">/**
+</span><span class="cm">* @Author: myxy99 &lt;myxy99@foxmail.com&gt;
+</span><span class="cm">* @Date: 2020/7/30 14:34
+</span><span class="cm"> */</span>
+<span class="kn">package</span> <span class="nx">mongoDb</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;github.com/globalsign/mgo/bson&#34;</span>
+	<span class="s">&#34;testing&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Movie</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Id</span>   <span class="nx">bson</span><span class="p">.</span><span class="nx">ObjectId</span> <span class="s">`bson:&#34;_id&#34; json:&#34;id&#34;`</span>
+	<span class="nx">Name</span> <span class="kt">string</span>        <span class="s">`bson:&#34;name&#34; json:&#34;name&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="p">(</span>
+	<span class="nx">db</span>         <span class="p">=</span> <span class="s">&#34;Movies&#34;</span>
+	<span class="nx">collection</span> <span class="p">=</span> <span class="s">&#34;MovieModel&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">TestClient_Insert</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="p">(</span>
+		<span class="nx">cfg</span> <span class="nx">CallerCfg</span>
+		<span class="nx">c</span>   <span class="o">*</span><span class="nx">Client</span>
+		<span class="nx">err</span> <span class="kt">error</span>
+	<span class="p">)</span>
+	<span class="nx">cfg</span> <span class="p">=</span> <span class="nx">CallerCfg</span><span class="p">{</span>
+		<span class="nx">Debug</span><span class="p">:</span>    <span class="kc">true</span><span class="p">,</span>
+		<span class="nx">URL</span><span class="p">:</span>      <span class="s">&#34;127.0.0.1:27017&#34;</span><span class="p">,</span>
+		<span class="nx">Source</span><span class="p">:</span>   <span class="s">&#34;admin&#34;</span><span class="p">,</span>
+		<span class="nx">User</span><span class="p">:</span>     <span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">Password</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nf">Run</span><span class="p">(</span><span class="nx">cfg</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Insert</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="nx">collection</span><span class="p">,</span> <span class="nx">Movie</span><span class="p">{</span>
+		<span class="nx">Id</span><span class="p">:</span>   <span class="nx">bson</span><span class="p">.</span><span class="nf">NewObjectId</span><span class="p">(),</span>
+		<span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;test123&#34;</span><span class="p">,</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+        <div class="post-footer">
+            <div class="info">
+                <span class="separator"><a class="category" href="/categories/golang/">golang</a></span>
+
+                <span class="separator"><a class="tag" href="/tags/golang/">golang</a><a class="tag" href="/tags/mongodb/">MongoDb</a></span>
+
+            </div>
+        </div>
+
+        
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="http://myxy99.cn/js/medium-zoom.min.2d6fd0be87fa98f0c9b4dc2536b312bbca48757f584f6ea1f394abc9bcc38fbc.js"
+        integrity="sha256-LW/Qvof6mPDJtNwlNrMSu8pIdX9YT26h85SrybzDj7w="
+        crossorigin="anonymous"></script></body>
+
+</html>

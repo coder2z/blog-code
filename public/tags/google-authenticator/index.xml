@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google-Authenticator on Coder2z Blog</title>
+    <link>http://myxy99.cn/tags/google-authenticator/</link>
+    <description>Recent content in Google-Authenticator on Coder2z Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 05 Aug 2020 20:43:46 +0800</lastBuildDate><atom:link href="http://myxy99.cn/tags/google-authenticator/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang实现Google-Authenticator</title>
+      <link>http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0google-authenticator/</link>
+      <pubDate>Wed, 05 Aug 2020 20:43:46 +0800</pubDate>
+      
+      <guid>http://myxy99.cn/posts/golang%E5%AE%9E%E7%8E%B0google-authenticator/</guid>
+      <description>什么是Google-Authenticator Google身份验证器是一款基于时间与哈希的一次性密码算法的两步验证软件令牌。也就是我们署成的TOTP（Time-based One-time Password）
+通俗的说就是：密钥+算法=code
+通过控制变量法，这里我们只需要手机上也设置一样的密钥使用一样的算法，就可以生成一样的code，从而达到二次验证。
+使用Go实现生成密码算法 /** * @Author: myxy99 &amp;lt;myxy99@foxmail.</description>
+    </item>
+    
+  </channel>
+</rss>

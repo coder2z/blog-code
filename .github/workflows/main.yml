@@ -23,5 +23,6 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           EXTERNAL_REPOSITORY: coder2z/coder2z.github.io
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
           PUBLISH_BRANCH: master
           PUBLISH_DIR: ./public

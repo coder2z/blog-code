@@ -1,28 +1,27 @@
-name: Deploy Hugo # 任君喜欢
-
+name: CI #自动化的名称
 on:
-  push:
-    branches:
-      - master   # master 更新触发
-
+  push: # push的时候触发
+    branches: # 那些分支需要触发
+      - master
 jobs:
-  build-deploy:
-    runs-on: ubuntu-18.04
+  build:
+    runs-on: ubuntu-latest # 镜像市场
     steps:
-      - uses: actions/checkout@v1
-
+      - name: checkout # 步骤的名称
+        uses: actions/checkout@master #软件市场的名称
+        with: # 参数
+          submodules: true
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v2.2.2
         with:
-          hugo-version: latest
-
-      - name: Build 
-        run: hugo
-
+          hugo-version: '0.59.1'
+          extended: true
+      - name: Build
+        run: hugo --minify
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }} # personal_token 这里新建一个 https://github.com/settings/tokens
-          PUBLISH_BRANCH: main  # 推送到当前 master 分支
-          PUBLISH_DIR: ./public  # hugo 生成到 public 作为跟目录
-          commit_message: ${{ github.event.head_commit.message }}
+        uses: peaceiris/actions-gh-pages@v2.5.1
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          EXTERNAL_REPOSITORY: coder2z/coder2z.github.io
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public

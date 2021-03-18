@@ -73,7 +73,7 @@ url = "mailto:Coder2z@qq.com"
 [params.utterances]
 repo = "coder2z/coder2z.github.io"
 issueTerm = "pathname"
-theme= "pgithub-dark"
+theme= "github-dark"
 label = "comment"
 
 ## Menu items

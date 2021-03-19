@@ -1,6 +1,6 @@
-+++
+---
 author = "Hugo Authors"
-+++
+---
 
 <!--
 This file is left intentionally empty by default to be backward compatible with initial theme setup.

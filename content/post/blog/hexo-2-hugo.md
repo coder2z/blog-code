@@ -5,7 +5,7 @@ Description: ""
 Tags: ["hugo","blog"]
 Categories: ["blog"]
 DisableComments: false
-url: /post/blog/HexoToHugo/
+url: /post/blog/hexo-to-hugo/
 ---
 
 # 序

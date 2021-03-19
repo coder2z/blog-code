@@ -28,7 +28,7 @@ displayMode = "dark"
 disableThemeSwitcher = false
 profilePicture = "images/profile.png"
 keywords = ""
-favicon = "favicons/"
+favicon = "/images/favicons/"
 # example ["css/custom.css"]
 customCss = []
 # example ["js/custom.js"]
@@ -74,7 +74,7 @@ url = "mailto:Coder2z@qq.com"
 repo = "coder2z/coder2z.github.io"
 issueTerm = "pathname"
 theme= "github-dark"
-label = "comment"
+label = ""
 
 ## Menu items
 

@@ -11,7 +11,7 @@ enableRobotsTXT = true
 #disqusShortname = ""
 
 # Google Analytics
-#googleAnalytics = "UA-123-45"
+googleAnalytics = "UA-123-45"
 
 # Syntax highlighting
 pygmentsUseClasses = true
@@ -40,7 +40,7 @@ doNotLoadAnimations = true
 # Form Spree Contact Form
 #contactFormAction = "https://formspree.io/f/your-form-hash-here"
 # Google Site Verify
-#googleSiteVerify = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+googleSiteVerify = "6Ld_cYUaAAAAAKNjRV3jy68ulOBIGwDf1bQSW-tR"
 # indexDateFormat = "Mon, Jan 2, 2006"
 # listDateFormat = "Jan 2"
 # singleDateFormat = "Mon, Jan 2, 2006"
@@ -64,6 +64,15 @@ icon = "fab fa-github"
 title = "GitHub"
 url = "https://github.com/Coder2z"
 
+[[params.socialIcons]]
+icon = "fab fa-qq"
+title = "QQ"
+url = "http://sighttp.qq.com/msgrd?v=1&uin=2399158611"
+
+[[params.socialIcons]]
+icon = "fab fa-telegram"
+title = "telegram"
+url = "https://t.me/Coder_Y"
 
 [[params.socialIcons]]
 icon = "fas fa-envelope"

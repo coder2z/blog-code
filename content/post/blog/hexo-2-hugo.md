@@ -10,7 +10,7 @@ DisableComments: false
 # 序
 
 很久没更新我的博客了~~ 
-不是我懒，主要还是:~~*&&(**^()&)..~~
+不是我懒，主要还是: ~~*&&(**^()&)..~~
 
 ![](https://oss.myxy99.cn/images/2021/03/20210319140004.jpg)
 
@@ -356,7 +356,7 @@ jobs:
     ```
 * 打开**blog-code**仓库的**settings**，再点击**Secrets**，然后添加刚刚生成的私钥，name为**ACTIONS_DEPLOY_KEY**
     ![](https://oss.myxy99.cn/images/2021/03/20210319151549.png)
-* 同理打开**coder2z.github.com**仓库的**settings**，再点击**Deploy keys**，**Allow write access**一定要勾上，否则会无法提交
+* 同理打开**coder2z.github.io**仓库的**settings**，再点击**Deploy keys**，**Allow write access**一定要勾上，否则会无法提交
     ![](https://oss.myxy99.cn/images/2021/03/20210319151646.png)
 
 
@@ -397,7 +397,7 @@ jobs:
 ```
 
 ### 3.1.2 配置密钥
-打开**coder2z.github.com**仓库的**settings**，再点击**Secrets**，然后一共添加三个私钥，name分别为**REMOTE_HOST**,**REMOTE_USER**,**PASSWORD**
+打开**coder2z.github.io**仓库的**settings**，再点击**Secrets**，然后一共添加三个私钥，name分别为**REMOTE_HOST**,**REMOTE_USER**,**PASSWORD**
 
 ![](https://oss.myxy99.cn/images/2021/03/20210319152558.png)
 

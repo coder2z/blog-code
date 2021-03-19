@@ -124,3 +124,6 @@ label = ""
   weight = 700
   identifier = "links"
   url = "/links/"
+
+[permalinks]
+  posts = "/:year/:month/:title/"

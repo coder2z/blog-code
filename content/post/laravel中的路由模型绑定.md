@@ -69,7 +69,7 @@ public function show($id){
 
 现在随便打开一篇文章的详细页，可以看到输出了下面的文章类：
 
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/17/20200717100138.png)
+![](https://oss.myxy99.cn/images/2020/07/17/20200717100138.png)
 
 同理 show() ，edit() ， update()
 

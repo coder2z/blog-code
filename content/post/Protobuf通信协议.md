@@ -67,7 +67,7 @@ Protobuf中定义一个数据结构需要用到关键字message，这一点和Ja
 
 ## 数据类型：
 常见的数据类型与protoc协议中的数据类型映射如下：
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/12/20200712161553.png)
+![](https://oss.myxy99.cn/images/2020/07/12/20200712161553.png)
 
 ## 枚举类型：
 

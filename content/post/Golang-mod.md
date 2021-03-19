@@ -51,7 +51,7 @@ replace (
 
 在我们开发微服务的适合，每个微服务都需要一个mod，比如这样：
 
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/21/20200721112455.png)
+![](https://oss.myxy99.cn/images/2020/07/21/20200721112455.png)
 
 但是这样会出现问题，就是在不使用Gopath的情况下，不方便导入pb包，所有这是就需要自定义包：
 
@@ -70,4 +70,4 @@ replace micro-auth/auth-srv => ../auth-srv
 
 这样代码中就可以直接导入了
 
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/21/20200721115154.png)
+![](https://oss.myxy99.cn/images/2020/07/21/20200721115154.png)

@@ -180,7 +180,7 @@ func TestGoogle(t *testing.T) {
 
 客户端只需要在手机上下载**Authenticator**添加服务端通过**ProvisionURI**方法生成的url，就可以达到验证效果:
 
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/08/05/IMG_0610.PNG)
+![](https://oss.myxy99.cn/images/2020/08/05/IMG_0610.PNG)
 
 
 这样就可以很方便的在你的网站中添加google验证器了。

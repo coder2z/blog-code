@@ -28,7 +28,7 @@ date = "2020-07-24T14:06:27+08:00"
 
 ## 网站架构
 
-![网站架构](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/24/20200724132536.png)
+![网站架构](https://oss.myxy99.cn/images/2020/07/24/20200724132536.png)
 
 ## 项目启动
 
@@ -36,7 +36,7 @@ date = "2020-07-24T14:06:27+08:00"
 
 apollo中添加配置
 
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/24/20200724140425.png)
+![](https://oss.myxy99.cn/images/2020/07/24/20200724140425.png)
 
 启动认证服务
 ```

@@ -74,7 +74,7 @@ func (r *RabbitMQ) failOnErr(err error, message string) {
 
 Simple模式工作流程：
 
-![Simple模式](https://gitee.com/coder2m/pic/raw/master/img/20200708092914.png)
+![Simple模式](https://oss.myxy99.cn/images/2021/03/20200708092914.png)
 
 ```golang
 //创建简单模式下RabbitMQ实例
@@ -208,7 +208,7 @@ func main() {
 
 Work模式工作流程：
 
-![Work模式](https://gitee.com/coder2m/pic/raw/master/img/20200708093050.png)
+![Work模式](https://oss.myxy99.cn/images/2021/03/20200708093050.png)
 
 simple模式和work模式其实用的是一套逻辑代码，只是work模式是可以有多个消费者的，work模式起到一个负载均衡的作用。
 
@@ -268,7 +268,7 @@ func main() {
 
 订阅模式工作流程：
 
-![](https://gitee.com/coder2m/pic/raw/master/img/20200708095831.png)
+![](https://oss.myxy99.cn/images/2021/03/20200708095831.png)
 
 订阅模式的特别是：一个消息被投递到多个队列，一个消息能被多个消费者获取。过程是由生产者将消息发送到exchange(交换机）里，然后exchange通过一系列的规则发送到队列上，然后由绑定对应的消费者进行消息。
 
@@ -435,7 +435,7 @@ func main() {
 
 路由模式工作流程：
 
-![](https://gitee.com/coder2m/pic/raw/master/img/20200708100024.png)
+![](https://oss.myxy99.cn/images/2021/03/20200708100024.png)
 
 路由模式:一个消息由多个消费者消费的基础上指定由哪些消息者来消费。
 
@@ -598,7 +598,7 @@ func main()  {
 
 话题模式工作流程：
 
-![](https://gitee.com/coder2m/pic/raw/master/img/20200708100143.png)
+![](https://oss.myxy99.cn/images/2021/03/20200708100143.png)
 
 话题模式：话题模式是在路由模式上演化而来。不同的是我们以通配符的方式来指定我们的消费者。
 

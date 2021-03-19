@@ -54,7 +54,7 @@ type Department struct {
 ```
 
 生成的表结构：
-![](https://gitee.com/coder2m/pic/raw/master/img/blog/2020/07/11/20200711101256.png)
+![](https://oss.myxy99.cn/images/2020/07/11/20200711101256.png)
 
 ## 外键
 默认的外键使用所有者类型名称加上其主键。像上面的例子，为了声明一个模型属于 User，它的外键应该为 UserID。

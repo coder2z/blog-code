@@ -16,7 +16,7 @@ date = "2020-07-05T10:06:47+08:00"
 
 
 没有依赖注入的系统：
-![](https://gitee.com/coder2m/pic/raw/master/img/20200709104638.png)
+![](https://oss.myxy99.cn/images/2021/03/20200709104638.png)
 
 在代码上的表现：
 ```golang

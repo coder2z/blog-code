@@ -82,8 +82,8 @@ url = "mailto:Coder2z@qq.com"
 [params.Gitalk]
 repo = "coder2z.github.io"
 owner = "coder2z"
-id = "00a0ec5bdacc1f01cf84"
-secret = "c1b12ec34e646e714eccef2bdaff831d21e64b59"
+id = "37ce91532ca8574b41a2"
+secret = "d7fcfd7d443d61fc40e377cda1690a55c52fb040"
 
 ## Menu items
 

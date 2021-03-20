@@ -79,11 +79,11 @@ icon = "fas fa-envelope"
 title = "e-mail"
 url = "mailto:Coder2z@qq.com"
 
-[params.utterances]
-repo = "coder2z/coder2z.github.io"
-issueTerm = "pathname"
-theme= "github-dark"
-label = ""
+[params.Gitalk]
+repo = "coder2z.github.io"
+owner = "coder2z"
+clientID = "00a0ec5bdacc1f01cf84"
+clientSecret = "c1b12ec34e646e714eccef2bdaff831d21e64b59"
 
 ## Menu items
 

@@ -52,6 +52,12 @@
                 {{ partial "comments/commento.html" . }}
             </div>
             {{- end -}}
+            {{- if .Site.Params.Gitalk -}}
+            <div id="fb_comments_container">
+                <h2>{{ i18n "comments" }}</h2>
+                {{ partial "comments/gitalk.html" . }}
+            </div>
+            {{- end -}}
         {{ end }}
     </div>
 

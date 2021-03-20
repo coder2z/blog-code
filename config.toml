@@ -84,7 +84,6 @@ repo = "coder2z.github.io"
 owner = "coder2z"
 id = "37ce91532ca8574b41a2"
 secret = "d7fcfd7d443d61fc40e377cda1690a55c52fb040"
-proxy = "https://vercel-cors-anywhere-vert.vercel.app/api/?url=https://github.com/login/oauth/access_token"
 
 ## Menu items
 

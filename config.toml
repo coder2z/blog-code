@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "en"
-DefaultContentLanguage = "en"
+DefaultContentLanguage = "zh-cn"
 title = "Coder2z's Blog"
 theme = "anatole"
 summarylength = 10

@@ -30,7 +30,7 @@ php artisan make:provider ResponseServiceProvider
 
 这一步主要就是给自带的response方法添加一些自己的方法：
 
-![](https://oss.myxy99.cn/images/2020/07/16/20200716220732.png)
+![](https://oss.codery.cn/images/2020/07/16/20200716220732.png)
 
 ```php
 use Illuminate\Support\Facades\Response;
@@ -47,12 +47,12 @@ Response::macro('fail', function ($code = 100, $msg = 'fail', $data = '',$status
 
 ## 在config/app.php文件中注册
 
-![](https://oss.myxy99.cn/images/2020/07/16/20200716220817.png)
+![](https://oss.codery.cn/images/2020/07/16/20200716220817.png)
 
 
 ## 控制器中的使用
 
-![](https://oss.myxy99.cn/images/2020/07/16/20200716220846.png)
+![](https://oss.codery.cn/images/2020/07/16/20200716220846.png)
 
 
 # composer全局绑定
@@ -90,7 +90,7 @@ if (!function_exists('json_fail')) {
 }
 
 ```
-![](https://oss.myxy99.cn/images/2020/07/16/20200716221718.png)
+![](https://oss.codery.cn/images/2020/07/16/20200716221718.png)
 
 
 新建funtions.php（因为我这里还导入了其他的函数所以就有下面很多，主要的还是导入我们上面写的文件）
@@ -101,7 +101,7 @@ require_once "json.php";
 
 ```
 
-![](https://oss.myxy99.cn/images/2020/07/16/20200716221853.png)
+![](https://oss.codery.cn/images/2020/07/16/20200716221853.png)
 
 
 ## composer全局导入
@@ -126,4 +126,4 @@ composer update
 
 控制器中的使用：
 
-![](https://oss.myxy99.cn/images/2020/07/16/20200716222336.png)
+![](https://oss.codery.cn/images/2020/07/16/20200716222336.png)

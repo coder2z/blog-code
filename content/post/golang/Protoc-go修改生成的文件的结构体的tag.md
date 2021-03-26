@@ -13,7 +13,7 @@ date = "2020-07-07T09:22:38+08:00"
 # 使用场景
 在使用protoc生成的文件中生成的结构体的json没有小写，有时候我们就需要使用小写，最主要的就是在使用gin的时候还需要使用bind来绑定上传的东西。但是生成的*.pd.go又不建议我们去改。这时候就需要使用protoc-go-inject-tag，这里还有个更重要的地方，这里简单描述下：生成的结构体中的tag里面有个```omitempty```，这个的作用呢，就是在数据传输过程中，自动去掉```false 0 ""```这些数据。这里简单的举个例子，比如你的grpc服务端返回给客户端一个值为false的bool类型数据。但是在客户端接受的时候，这个字段就直接没有了。所以这样肯定是不行的。所以这里需要集体的去掉tag中的```omitempty```。这个时候protoc-go-inject-tag就可以满足这个需求。在之后的微服务（go-micro）开发中，这个也是很重要的地方！
 
-![](https://oss.myxy99.cn/images/2021/03/20200710092950.png)
+![](https://oss.codery.cn/images/2021/03/20200710092950.png)
 
 git地址：[https://github.com/favadi/protoc-go-inject-tag](https://github.com/favadi/protoc-go-inject-tag)
 
@@ -73,7 +73,7 @@ protoc-go-inject-tag -input=./*.pb.go
 
 ```
 
-![](https://oss.myxy99.cn/images/2021/03/20200710095030.png)
+![](https://oss.codery.cn/images/2021/03/20200710095030.png)
 
 ## 执行结果
 

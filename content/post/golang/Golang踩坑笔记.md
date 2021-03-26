@@ -66,7 +66,7 @@ func main() {
 
 按理说这里的 13 与 3.5 类型也是不一样的，为什么就没有报错呢？
 
-![](https://oss.myxy99.cn/images/2021/03/20200915113134.png)
+![](https://oss.codery.cn/images/2021/03/20200915113134.png)
 
 ## 计算
 

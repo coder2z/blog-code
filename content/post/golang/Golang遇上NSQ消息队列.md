@@ -46,7 +46,7 @@ docker exec -ti lookupd /bin/sh    #进入容器，查看nsq目录结构
 
 ```
 
-![](https://oss.myxy99.cn/images/2020/07/14/20200714221747.png)
+![](https://oss.codery.cn/images/2020/07/14/20200714221747.png)
 
 ### 启动nsqadmin管理系统
 
@@ -57,7 +57,7 @@ docker run -d --name nsqadmin
 
 ```
 
-![](https://oss.myxy99.cn/images/2020/07/14/20200714221844.png)
+![](https://oss.codery.cn/images/2020/07/14/20200714221844.png)
 
 ## 部署NSQd节点服务
 
@@ -71,7 +71,7 @@ docker run -d --name nsqd -p 4150:4150 -p
 
 ```
 
-![](https://oss.myxy99.cn/images/2020/07/14/20200714221947.png)
+![](https://oss.codery.cn/images/2020/07/14/20200714221947.png)
 
 
 ### 创建从服务器（可以省略，根据需求来）
@@ -90,7 +90,7 @@ docker run -d --name nsqd -p 4150:4150 -p
 
 访问：ip:4171
 
-![](https://oss.myxy99.cn/images/2020/07/14/20200714222423.png)
+![](https://oss.codery.cn/images/2020/07/14/20200714222423.png)
 
 搭建成功
 

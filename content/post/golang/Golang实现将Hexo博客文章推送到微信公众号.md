@@ -80,11 +80,11 @@ func main() {
 
 *爬虫前需要把需要爬虫的网站信息存储到redis中*
 
-![](https://oss.myxy99.cn/images/2020/07/15/20200715123711.png)
+![](https://oss.codery.cn/images/2020/07/15/20200715123711.png)
 
 爬取结果：
 
-![](https://oss.myxy99.cn/images/2020/07/15/20200715123621.png)
+![](https://oss.codery.cn/images/2020/07/15/20200715123621.png)
 
 
 # 实现微信公众号数据的发送
